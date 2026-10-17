@@ -1,0 +1,343 @@
+{
+  "hero": {
+    "signature": "Anisah R. Aisy",
+    "badge": "B.Sc. Chemistry Universitas Brawijaya (GPA 3.60/4.00) | BPI LPDP Awardee",
+    "greetingTitle": "Hi all, I'm Anisah Rihadatul Aisy",
+    "greetingSubtitle": "Lulusan Sarjana Kimia Universitas Brawijaya dengan spesialisasi Research & Development (Nanostructured Lipid Carrier), Analytical Instrumentation (LC-HRMS, GC-MS, HPLC, AAS, FTIR, UV-Vis), dan Quality Control sesuai standar ISO/IEC 17025:2017, ISO 9001:2015, GMP/CPOB, serta HACCP.",
+    "portraitUrl": "/assets/portrait-cutout.svg",
+    "floatingBadgeRight": "NLC Particle Size: 326 nm",
+    "floatingBadgeLeft": "LC-HRMS Match: 98.3%",
+    "resumeUrl": "/assets/CV-Anisah-Rihadatul-Aisy.pdf"
+  },
+  "education": {
+    "institution": "Universitas Brawijaya, Malang",
+    "degree": "Sarjana Kimia (S1)",
+    "period": "Agustus 2022 s/d Juli 2026",
+    "gpa": "3,60 / 4,00",
+    "thesis": "Studi Potensi Antioksidan dan Laju Permeasi NLC-Cur-CTAB pada Membran Alami",
+    "highlights": [
+      "Awardee Beasiswa Pendidikan Indonesia (Kemendikbudristek & LPDP) 2022",
+      "Best Student pada Student Mobility Program, Universiti Malaysia Terengganu 2025",
+      "Research Assistant Physical Chemistry Lab & Laboratory Assistant (Biochemistry & Organic Chemistry)",
+      "Wakil Kepala Bidang Quranic Scientific Writing & App Design Universitas Brawijaya"
+    ]
+  },
+  "skillIcons": [
+    {
+      "id": "inst-1",
+      "name": "LC-HRMS & HPLC",
+      "category": "Chromatography",
+      "icon": "chromatography"
+    },
+    {
+      "id": "inst-2",
+      "name": "GC-MS & TruNarc",
+      "category": "Forensic QC",
+      "icon": "spectroscopy"
+    },
+    {
+      "id": "inst-3",
+      "name": "FTIR & UV-Vis",
+      "category": "Spectrophotometry",
+      "icon": "wave"
+    },
+    {
+      "id": "inst-4",
+      "name": "NLC Formulation",
+      "category": "PIT Method (326 nm)",
+      "icon": "molecule"
+    },
+    {
+      "id": "inst-5",
+      "name": "AAS & Winkler",
+      "category": "Water & Trace Metals",
+      "icon": "flask"
+    },
+    {
+      "id": "inst-6",
+      "name": "ISO 17025 & GMP",
+      "category": "HACCP & BPOM QA",
+      "icon": "shield"
+    }
+  ],
+  "competencies": [
+    {
+      "id": 1,
+      "name": "Analytical Instrumentation (LC-HRMS, GC-MS, HPLC, AAS, TruNarc)",
+      "level": 5
+    },
+    {
+      "id": 2,
+      "name": "Spectrophotometry & Microscopy (FTIR, UV-Vis, Spectrofluorometer, CLSM)",
+      "level": 5
+    },
+    {
+      "id": 3,
+      "name": "R&D Formulation (Nanostructured Lipid Carrier, Nanoemulsion, Soxhlet)",
+      "level": 4
+    },
+    {
+      "id": 4,
+      "name": "Quality Management Systems (ISO/IEC 17025:2017, ISO 9001:2015, GLP)",
+      "level": 4
+    },
+    {
+      "id": 5,
+      "name": "Pharmaceutical GMP/CPOB, Codex HACCP & BPOM Regulatory Compliance",
+      "level": 4
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "company": "Universitas Brawijaya",
+      "role": "Laboratory Assistant (Biochemistry Lab)",
+      "period": "Februari 2026 s/d Mei 2026",
+      "bannerColor": "#55198b",
+      "summary": "Membimbing 28 mahasiswa dalam 6 sesi praktikum Biokimia berbahasa Inggris meliputi analisis karbohidrat, asam amino, protein, lipid, vitamin, dan uji aktivitas enzim.",
+      "metrics": [
+        "28 Practicum Students",
+        "English Medium Class",
+        "6 Bio-Assay Modules"
+      ]
+    },
+    {
+      "id": 2,
+      "company": "Lab Forensik Narkoba Polda Jatim",
+      "role": "Quality Control Intern & Independent Research",
+      "period": "Januari 2026",
+      "bannerColor": "#171c28",
+      "summary": "Melakukan screening lebih dari 50 sampel forensik per hari menggunakan reagen Marquis-Simon dan instrumen TruNarc pada sampel metamfetamin, cannabis, dan obat, serta analisis konfirmasi GC-MS.",
+      "metrics": [
+        ">50 Forensic Samples/Day",
+        "Marquis-Simon & TruNarc",
+        "GC-MS Confirmation"
+      ]
+    },
+    {
+      "id": 3,
+      "company": "Universitas Brawijaya",
+      "role": "Research Assistant (Physical Chemistry Lab)",
+      "period": "Agustus 2025 s/d Desember 2025",
+      "bannerColor": "#55198b",
+      "summary": "Memformulasikan NLC bermuatan kurkumin metode PIT (ukuran partikel homogen rata-rata 326 nm), ekstraksi Soxhlet (rendemen 9,44 s/d 18%), identifikasi LC-HRMS (98,3% match), dan uji fotofisika untuk manuskrip jurnal SINTA 2.",
+      "metrics": [
+        "Particle Size: 326 nm",
+        "Soxhlet: 9,44-18%",
+        "LC-HRMS: 98,3%"
+      ]
+    },
+    {
+      "id": 4,
+      "company": "Universitas Brawijaya",
+      "role": "Laboratory Assistant (Organic Chemistry Lab)",
+      "period": "Agustus 2025 s/d Desember 2025",
+      "bannerColor": "#3b1d6e",
+      "summary": "Mendampingi 42 mahasiswa dalam 4 eksperimen kimia organik (isolasi kafein daun teh, ekstraksi kurkuminoid kunyit, hidrolisis trimiristin pala, minyak atsiri jahe) serta interpretasi spektrum FTIR dan UV-Vis.",
+      "metrics": [
+        "42 Practicum Students",
+        "4 Synthesis & Extraction Modules",
+        "FTIR & UV-Vis"
+      ]
+    },
+    {
+      "id": 5,
+      "company": "PDAM Delta Tirta Sidoarjo",
+      "role": "Quality Control Intern & Independent Research",
+      "period": "Juni 2025 s/d Agustus 2025",
+      "bannerColor": "#0071c5",
+      "summary": "Menguji kualitas air wilayah Buduran dan Krian (pH meter, turbidimeter, spektrofotometer) serta melaksanakan jar test koagulan PAC 50 s/d 140 ppm dengan dosis optimum 90 ppm (kekeruhan akhir 2,71 +/- 0,5 NTU).",
+      "metrics": [
+        "PAC Range: 50-140 ppm",
+        "Optimum Dose: 90 ppm",
+        "Turbidity: 2,71 NTU"
+      ]
+    },
+    {
+      "id": 6,
+      "company": "Universiti Malaysia Terengganu",
+      "role": "Student Exchange Program Researcher",
+      "period": "April 2025 s/d Mei 2025",
+      "bannerColor": "#0f5c54",
+      "summary": "Mengambil sampel air laut pada kedalaman 0, 5, 10, 15, dan 20 m menggunakan Niskin Sampler 5 L, menentukan DO metode titrasi Winkler (Na2S2O3 0,0125 M), serta analisis fosfor, AAS, dan HPLC.",
+      "metrics": [
+        "Depth: 0-20 Meters",
+        "Winkler Titration",
+        "Best Student Award"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "name": "HACCP Documentation Development Training (Batch 32)",
+      "issuer": "Makin Ahli",
+      "issuedDate": "Mei 2026",
+      "expiryDate": "",
+      "detail": "Penyusunan dokumentasi HACCP meliputi analisis bahaya, penentuan CCP, sistem monitoring, tindakan koreksi, validasi, verifikasi, dan dokumentasi keamanan pangan berbasis Codex HACCP.",
+      "credentialUrl": "https://makinahli.com"
+    },
+    {
+      "id": 2,
+      "name": "Good Manufacturing Practice (GMP/CPOB) for Pharmaceutical Training (Batch 12)",
+      "issuer": "Makin Ahli",
+      "issuedDate": "Februari 2026",
+      "expiryDate": "",
+      "detail": "Prinsip dasar GMP/CPOB meliputi quality assurance, dokumentasi batch, higiene dan sanitasi, prosedur produksi, serta praktik quality control di industri farmasi.",
+      "credentialUrl": "https://makinahli.com"
+    },
+    {
+      "id": 3,
+      "name": "Research & Development Specialist (Flavour Industry)",
+      "issuer": "Latih",
+      "issuedDate": "Desember 2025",
+      "expiryDate": "",
+      "detail": "Kolaborasi lintas fungsi R&D dengan Quality Control, Regulatory & QA, Production, Purchasing, Marketing, serta Business Development/Sales.",
+      "credentialUrl": "https://latih.id"
+    },
+    {
+      "id": 4,
+      "name": "ISO/IEC 17025:2017 Sistem Manajemen Laboratorium",
+      "issuer": "Professional Training",
+      "issuedDate": "Januari 2026",
+      "expiryDate": "",
+      "detail": "Penerapan standar ISO/IEC 17025:2017 terkait kompetensi laboratorium pengujian dan kalibrasi, pengendalian dokumen, ketertelusuran pengukuran, serta validitas hasil.",
+      "credentialUrl": "https://iso.org"
+    },
+    {
+      "id": 5,
+      "name": "ISO 9001:2015 Sistem Manajemen Mutu",
+      "issuer": "Professional Training",
+      "issuedDate": "Januari 2026",
+      "expiryDate": "",
+      "detail": "Prinsip Sistem Manajemen Mutu ISO 9001:2015 meliputi pendekatan proses, pengendalian informasi terdokumentasi, manajemen risiko, evaluasi kinerja, dan perbaikan berkelanjutan.",
+      "credentialUrl": "https://iso.org"
+    },
+    {
+      "id": 6,
+      "name": "Healthcare Regulatory: Obat dan Kosmetik",
+      "issuer": "Regulatory Compliance Training",
+      "issuedDate": "Maret 2026",
+      "expiryDate": "",
+      "detail": "Dasar regulasi obat dan kosmetik, klasifikasi produk, kesiapan regulatori, jalur registrasi/notifikasi BPOM, serta pemenuhan dokumen keamanan dan mutu.",
+      "credentialUrl": "https://pom.go.id"
+    },
+    {
+      "id": 7,
+      "name": "Healthcare Regulatory: Penandaan, Klaim & Tindak Lanjut Kepatuhan",
+      "issuer": "Regulatory Compliance Training",
+      "issuedDate": "Maret 2026",
+      "expiryDate": "",
+      "detail": "Evaluasi penandaan dan klaim produk sesuai regulasi BPOM, identifikasi temuan kepatuhan, serta penyusunan tindak lanjut dan corrective action atas ketidaksesuaian.",
+      "credentialUrl": "https://pom.go.id"
+    }
+  ],
+  "publications": [
+    {
+      "id": 1,
+      "type": "Publikasi Ilmiah",
+      "title": "Studi Potensi Antioksidan dan Laju Permeasi NLC-Cur-CTAB pada Membran Alami",
+      "publisher": "Skripsi Sarjana Kimia UB & Manuskrip Jurnal SINTA 2 (2025-2026)",
+      "summary": "Formulasi Nanostructured Lipid Carrier bermuatan kurkuminoid metode PIT (326 nm), ekstraksi Soxhlet, konfirmasi LC-HRMS (98,3%), dan evaluasi fotofisika pada empat polaritas pelarut.",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 2,
+      "type": "Publikasi Ilmiah",
+      "title": "SUPER-HUB: Alternative Action Pengemban Urea terhadap Tanaman dari Keratin Hasil Isolasi Limbah Bulu Ayam",
+      "publisher": "Gold Medal Winner | National Level Scientific Writing Competition (NASPO 2024)",
+      "summary": "Inovasi pemanfaatan keratin hasil isolasi limbah bulu ayam sebagai matriks lepas lambat pupuk urea untuk efisiensi serapan nutrisi tanaman.",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 3,
+      "type": "Publikasi Ilmiah",
+      "title": "Hydrogel-BAP: Alternative Functionalized Wound Covering Based on Biomass Waste Keratin Isolation",
+      "publisher": "Silver Medal Winner | International Scientific Writing Competition (WYIIA 2024)",
+      "summary": "Pengembangan penutup luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa.",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 4,
+      "type": "Publikasi Ilmiah",
+      "title": "SOK-ek: Sebagai Inhibitor Aksesibilitas Proliferasi Sel Kanker terhadap Breast Cancer melalui Oral Treatment Metode Ekstraksi Kunyit",
+      "publisher": "Juara 2 | Futuristic Science Idea of The Quran Universitas Brawijaya (Juni 2024)",
+      "summary": "Karya ilmiah eksplorasi potensi ekstrak kurkuminoid kunyit sebagai agen penghambat proliferasi sel kanker payudara.",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 5,
+      "type": "Publikasi Ilmiah",
+      "title": "Energi Terbarukan: Pembuatan Bensin dari Limbah Sampah Plastik Menggunakan Metode Destilasi",
+      "publisher": "Silver Medal Winner | National Applied Science Project Olympiad (NASPO 2021)",
+      "summary": "Riset konversi termal limbah plastik menjadi fraksi bahan bakar cair setara bensin melalui proses destilasi bertingkat.",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 6,
+      "type": "Artikel Eksternal",
+      "title": "Selected Author: Buku Antologi \"Antara Jarak dan Doa\" Jilid 2 & \"Merelakanmu dengan Caraku\"",
+      "publisher": "National Writing Competition | Halo Penulis (2023 & 2024)",
+      "summary": "Karya tulis terpilih dalam kompetisi penulisan tingkat nasional yang diterbitkan secara resmi dalam dua judul buku antologi.",
+      "url": "https://goodreads.com"
+    }
+  ],
+  "leadership": [
+    {
+      "id": 1,
+      "role": "Wakil Kepala Bidang Quranic Scientific Writing & App Design",
+      "organization": "Universitas Brawijaya (Februari 2025 s/d Desember 2025)",
+      "description": "Mengoordinasikan tim beranggotakan 5 orang serta menyusun materi dan memimpin sesi mentoring penulisan karya ilmiah mingguan."
+    },
+    {
+      "id": 2,
+      "role": "Staff Divisi Energy & Green + PDD Coordinator Save Our Earth",
+      "organization": "Young On Top (YOT) Malang",
+      "description": "Mengelola program rutin kesehatan dan lingkungan, mengoordinasikan tim Publikasi, Dekorasi, dan Dokumentasi pada kampanye deforestasi Save Our Earth."
+    },
+    {
+      "id": 3,
+      "role": "Science Outreach Educator (\"Literasix: The Six Pillars of Our Future\")",
+      "organization": "Program Edukasi Sains Sekolah Dasar",
+      "description": "Menjadi pemateri eksperimen sains interaktif mengenai konsep asam-basa dan densitas bagi siswa kelas 4 SD."
+    },
+    {
+      "id": 4,
+      "role": "Liaison Officer MTQMN XVII & Staf KTI Al-Quran GBQN X 2024",
+      "organization": "Tingkat Nasional | Universitas Brawijaya",
+      "description": "Mendampingi logistik dan koordinasi dua kontingen universitas tingkat nasional serta menjadi panitia bidang Karya Tulis Ilmiah."
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "category": "Email Resmi",
+      "label": "anisah.aisy@email.com",
+      "url": "mailto:anisah.aisy@email.com"
+    },
+    {
+      "id": 2,
+      "category": "LinkedIn",
+      "label": "linkedin.com/in/anisah-rihadatul-aisy",
+      "url": "https://linkedin.com"
+    },
+    {
+      "id": 3,
+      "category": "No. Telepon / WhatsApp",
+      "label": "+62 812-XXXX-XXXX",
+      "url": "https://wa.me/6281200000000"
+    },
+    {
+      "id": 4,
+      "category": "Publikasi Ilmiah",
+      "label": "Google Scholar / SINTA / ORCID",
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 5,
+      "category": "Artikel Eksternal",
+      "label": "Portofolio Artikel & Buku Antologi",
+      "url": "https://medium.com"
+    }
+  ]
+}

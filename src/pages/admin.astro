@@ -1,0 +1,977 @@
+---
+import initialData from '../data/portfolioData.json';
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel CMS | Anisah Rihadatul Aisy Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-app: #F8FAFC;
+      --bg-panel: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --text-main: #0F172A;
+      --text-sub: #475569;
+      --text-muted: #94A3B8;
+      --border: #E2E8F0;
+      --primary: #55198b;
+      --primary-hover: #8c43ce;
+      --primary-soft: #F3E8FF;
+      --danger: #DC2626;
+      --danger-soft: #FEE2E2;
+      --success: #059669;
+      --success-soft: #D1FAE5;
+      --radius-lg: 14px;
+      --radius-md: 9px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-app);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    .sidebar {
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      padding: 4px 12px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .brand h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 11px 14px;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .count-badge {
+      background: rgba(15, 23, 42, 0.08);
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-btn.active .count-badge {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+    }
+
+    .workspace {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 70px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .status-chip {
+      background: var(--success-soft);
+      color: var(--success);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn-edit {
+      background: var(--primary-soft);
+      color: var(--primary);
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .btn-edit:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .btn-del {
+      background: var(--danger-soft);
+      color: var(--danger);
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .btn-del:hover {
+      background: var(--danger);
+      color: #FFFFFF;
+    }
+
+    .content {
+      padding: 32px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .cms-sec { display: none; }
+    .cms-sec.active { display: block; }
+
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .sec-head h1 { font-size: 22px; font-weight: 700; }
+    .sec-head p { font-size: 13.5px; color: var(--text-sub); margin-top: 4px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.04);
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .card-title { font-size: 16.5px; font-weight: 700; margin: 8px 0 4px; }
+    .card-meta { font-size: 12px; font-weight: 600; color: var(--text-sub); margin-bottom: 6px; }
+    .card-desc { font-size: 13px; color: var(--text-sub); }
+
+    .card-foot {
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .seg-bar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      height: 9px;
+      margin-top: 10px;
+    }
+
+    .seg-dash { background: var(--border); border-radius: 4px; }
+    .seg-dash.filled { background: var(--primary-hover); }
+
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-app);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: 18px;
+      width: min(580px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text-main);
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+      z-index: 300;
+    }
+    .toast.show { display: block; }
+
+    @media (max-width: 960px) {
+      body { grid-template-columns: 1fr; }
+      .sidebar { height: auto; position: relative; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <h2>&lt;Anisah CMS /&gt;</h2>
+        <p>Full CRUD Portfolio Manager</p>
+      </div>
+      <ul class="nav-list">
+        <li><button class="nav-btn active" data-sec="hero"><span>01. Welcoming & Foto</span><span class="count-badge">Hero</span></button></li>
+        <li><button class="nav-btn" data-sec="skills"><span>02. Skills & Level Bar</span><span class="count-badge" id="cnt-skills">5</span></button></li>
+        <li><button class="nav-btn" data-sec="exp"><span>03. Work Experiences</span><span class="count-badge" id="cnt-exp">6</span></button></li>
+        <li><button class="nav-btn" data-sec="certs"><span>04. Education & Certs</span><span class="count-badge" id="cnt-certs">7</span></button></li>
+        <li><button class="nav-btn" data-sec="pubs"><span>05. Publications & Link</span><span class="count-badge" id="cnt-pubs">6</span></button></li>
+        <li><button class="nav-btn" data-sec="acc"><span>06. Accounts & Kontak</span><span class="count-badge" id="cnt-acc">5</span></button></li>
+      </ul>
+    </div>
+    <div style="font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 12px;">
+      Ekspor file <code>portfolioData.json</code> kapan saja untuk commit permanen ke GitHub.
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <span class="status-chip">Live Local & Repository JSON Sync Ready</span>
+      <div class="top-actions">
+        <a href="/" class="btn btn-outline">Lihat Halaman Publik</a>
+        <button class="btn btn-outline" id="resetDefaultBtn">Reset Default</button>
+        <button class="btn btn-primary" id="exportJsonBtn">Export portfolioData.json</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- SECTION 1: HERO & WELCOMING -->
+      <section id="sec-hero" class="cms-sec active">
+        <div class="sec-head">
+          <div>
+            <h1>01. Pengaturan Halaman Welcoming & Foto Cutout</h1>
+            <p>Ubah kalimat sambutan, badge, URL/upload foto profil transparan (blank background), dan tautan CV.</p>
+          </div>
+          <button class="btn btn-primary" id="saveHeroBtn">Simpan Perubahan Hero</button>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div>
+              <span class="pill">TEKS WELCOMING</span>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Nama Signature di Logo Navbar</label>
+                <input id="inpSig" class="input" />
+              </div>
+              <div class="form-group">
+                <label>Badge Atas Judul</label>
+                <input id="inpBadge" class="input" />
+              </div>
+              <div class="form-group">
+                <label>Judul Welcoming Utama</label>
+                <input id="inpTitle" class="input" />
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Welcoming</label>
+                <textarea id="inpSub" class="textarea" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div>
+              <span class="pill">FOTO TRANSPARAN & FILE CV</span>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Upload Foto PNG/WebP Transparan (Otomatis Konversi Data URL)</label>
+                <input type="file" id="inpPhotoFile" class="input" accept="image/png,image/webp,image/svg+xml" />
+              </div>
+              <div class="form-group">
+                <label>Atau Path / URL Foto Profil</label>
+                <input id="inpPhotoUrl" class="input" />
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Floating Badge Kanan Atas</label>
+                  <input id="inpFloatR" class="input" />
+                </div>
+                <div class="form-group">
+                  <label>Floating Badge Kiri Bawah</label>
+                  <input id="inpFloatL" class="input" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>URL / Path File Resume PDF</label>
+                <input id="inpResumeUrl" class="input" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: SKILLS & 5-LEVEL BAR -->
+      <section id="sec-skills" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>02. Kompetensi & Level Bar Putus-putus (5 Tingkat)</h1>
+            <p>Klik Edit pada kartu mana saja untuk mengubah nama kompetensi atau levelnya (Beginner s/d Expert).</p>
+          </div>
+          <button class="btn btn-primary" id="addSkillBtn">+ Tambah Kompetensi</button>
+        </div>
+        <div class="grid-2" id="adminSkillsGrid"></div>
+      </section>
+
+      <!-- SECTION 3: WORK EXPERIENCES -->
+      <section id="sec-exp" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>03. Work & Laboratory Experiences</h1>
+            <p>Semua kartu pengalaman kerja, magang QC, dan asistensi lab yang sudah ada dapat diedit atau ditambah.</p>
+          </div>
+          <button class="btn btn-primary" id="addExpBtn">+ Tambah Card Pengalaman</button>
+        </div>
+        <div class="grid-3" id="adminExpGrid"></div>
+      </section>
+
+      <!-- SECTION 4: EDUCATION & CERTIFICATIONS -->
+      <section id="sec-certs" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>04. Education & Certification Cards</h1>
+            <p>Bulan/Tahun Terbit wajib diisi, sedangkan Bulan/Tahun Kadaluarsa bersifat opsional.</p>
+          </div>
+          <button class="btn btn-primary" id="addCertBtn">+ Tambah Card Sertifikat</button>
+        </div>
+        <div class="card" style="margin-bottom: 22px; border-left: 4px solid var(--primary);" id="adminEduCard"></div>
+        <div class="grid-3" id="adminCertsGrid"></div>
+      </section>
+
+      <!-- SECTION 5: PUBLICATIONS & EXTERNAL ARTICLES -->
+      <section id="sec-pubs" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>05. Publications & Artikel Situs Lain (Redirect URL)</h1>
+            <p>Kelola kartu Publikasi Ilmiah dan Artikel Eksternal beserta URL tujuan saat kartu diklik.</p>
+          </div>
+          <button class="btn btn-primary" id="addPubBtn">+ Tambah Publikasi / Artikel</button>
+        </div>
+        <div class="grid-2" id="adminPubsGrid"></div>
+      </section>
+
+      <!-- SECTION 6: ACCOUNTS & CONTACT -->
+      <section id="sec-acc" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>06. Accounts & Direct Contact Cards</h1>
+            <p>Kelola kartu Email, LinkedIn, Nomor Telepon/WhatsApp, Google Scholar, dan Situs Artikel.</p>
+          </div>
+          <button class="btn btn-primary" id="addAccBtn">+ Tambah Akun Baru</button>
+        </div>
+        <div class="grid-3" id="adminAccGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL UNIVERSAL UNTUK CREATE & UPDATE -->
+  <div class="modal-backdrop" id="crudModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="modalTitle">Edit Item</h3>
+        <button class="btn btn-outline" id="closeModalBtn">Tutup</button>
+      </div>
+      <div id="modalFormContainer"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastEl"></div>
+
+  <script id="default-json" type="application/json" set:html={JSON.stringify(initialData)}></script>
+
+  <script>
+    const STORAGE_KEY = 'anisah_portfolio_cms_data_v1';
+    const LEVEL_LABELS = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced', 4: 'Professional', 5: 'Expert' };
+
+    let state = loadState();
+
+    function loadState() {
+      const fallback = JSON.parse(document.getElementById('default-json').textContent);
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function persistState(msg = 'Perubahan berhasil disimpan!') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderAdmin();
+      showToast(msg);
+    }
+
+    function showToast(text) {
+      const t = document.getElementById('toastEl');
+      t.textContent = text;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    function renderAdmin() {
+      // Hero Form
+      document.getElementById('inpSig').value = state.hero.signature;
+      document.getElementById('inpBadge').value = state.hero.badge;
+      document.getElementById('inpTitle').value = state.hero.greetingTitle;
+      document.getElementById('inpSub').value = state.hero.greetingSubtitle;
+      document.getElementById('inpPhotoUrl').value = state.hero.portraitUrl;
+      document.getElementById('inpFloatR').value = state.hero.floatingBadgeRight;
+      document.getElementById('inpFloatL').value = state.hero.floatingBadgeLeft;
+      document.getElementById('inpResumeUrl').value = state.hero.resumeUrl;
+
+      // Counts
+      document.getElementById('cnt-skills').textContent = state.competencies.length;
+      document.getElementById('cnt-exp').textContent = state.experiences.length;
+      document.getElementById('cnt-certs').textContent = state.certifications.length;
+      document.getElementById('cnt-pubs').textContent = state.publications.length;
+      document.getElementById('cnt-acc').textContent = state.accounts.length;
+
+      // 2. Skills
+      document.getElementById('adminSkillsGrid').innerHTML = state.competencies.map(item => {
+        let dashes = '';
+        for (let i = 1; i <= 5; i++) {
+          dashes += `<div class="seg-dash ${i <= item.level ? 'filled' : ''}"></div>`;
+        }
+        return `
+          <div class="card">
+            <div>
+              <div style="display:flex; justify-content:space-between;">
+                <span class="pill">Level ${item.level} / 5</span>
+                <strong style="font-size:12px; color:var(--primary); text-transform:uppercase;">${LEVEL_LABELS[item.level]}</strong>
+              </div>
+              <h3 class="card-title">${item.name}</h3>
+              <div class="seg-bar">${dashes}</div>
+            </div>
+            <div class="card-foot">
+              <span style="font-size:12px; color:var(--text-muted);">Label kanan: ${LEVEL_LABELS[item.level]}</span>
+              <div>
+                <button class="btn btn-edit" onclick="window.editSkill(${item.id})">Edit</button>
+                <button class="btn btn-del" onclick="window.delItem('competencies', ${item.id})">Hapus</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 3. Experiences
+      document.getElementById('adminExpGrid').innerHTML = state.experiences.map(exp => `
+        <div class="card">
+          <div>
+            <div style="height:7px; border-radius:99px; background:${exp.bannerColor}; margin-bottom:10px;"></div>
+            <span class="pill">${exp.company}</span>
+            <h3 class="card-title">${exp.role}</h3>
+            <div class="card-meta">${exp.period}</div>
+            <p class="card-desc">${exp.summary}</p>
+          </div>
+          <div class="card-foot">
+            <span style="font-size:11.5px; color:var(--text-muted);">${(exp.metrics || []).join(' · ')}</span>
+            <div>
+              <button class="btn btn-edit" onclick="window.editExp(${exp.id})">Edit</button>
+              <button class="btn btn-del" onclick="window.delItem('experiences', ${exp.id})">Hapus</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 4. Education & Certifications
+      const ed = state.education;
+      document.getElementById('adminEduCard').innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+          <div>
+            <span class="pill">${ed.period} | IPK ${ed.gpa}</span>
+            <h3 class="card-title">${ed.institution} (${ed.degree})</h3>
+            <p class="card-desc">Skripsi: ${ed.thesis}</p>
+          </div>
+          <button class="btn btn-edit" onclick="window.editEdu()">Edit Pendidikan</button>
+        </div>
+      `;
+
+      document.getElementById('adminCertsGrid').innerHTML = state.certifications.map(c => {
+        const expInfo = c.expiryDate ? `Terbit: ${c.issuedDate} | Exp: ${c.expiryDate}` : `Terbit: ${c.issuedDate} (Tanpa Kadaluarsa)`;
+        return `
+          <div class="card">
+            <div>
+              <span class="pill">${c.issuer}</span>
+              <h3 class="card-title">${c.name}</h3>
+              <div class="card-meta">${expInfo}</div>
+              <p class="card-desc">${c.detail}</p>
+            </div>
+            <div class="card-foot">
+              <a href="${c.credentialUrl}" target="_blank" style="font-size:12px; color:var(--primary); font-weight:600;">Kredensial</a>
+              <div>
+                <button class="btn btn-edit" onclick="window.editCert(${c.id})">Edit</button>
+                <button class="btn btn-del" onclick="window.delItem('certifications', ${c.id})">Hapus</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 5. Publications
+      document.getElementById('adminPubsGrid').innerHTML = state.publications.map(p => `
+        <div class="card">
+          <div>
+            <span class="pill">${p.type}</span>
+            <h3 class="card-title">${p.title}</h3>
+            <div class="card-meta">${p.publisher}</div>
+            <p class="card-desc">${p.summary}</p>
+          </div>
+          <div class="card-foot">
+            <a href="${p.url}" target="_blank" style="font-size:12px; color:var(--primary); font-weight:600;">Redirect URL</a>
+            <div>
+              <button class="btn btn-edit" onclick="window.editPub(${p.id})">Edit</button>
+              <button class="btn btn-del" onclick="window.delItem('publications', ${p.id})">Hapus</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 6. Accounts
+      document.getElementById('adminAccGrid').innerHTML = state.accounts.map(a => `
+        <div class="card">
+          <div>
+            <span class="pill">${a.category}</span>
+            <h3 class="card-title">${a.label}</h3>
+            <p class="card-desc" style="word-break:break-all;">${a.url}</p>
+          </div>
+          <div class="card-foot">
+            <a href="${a.url}" target="_blank" style="font-size:12px; color:var(--primary); font-weight:600;">Tes Link</a>
+            <div>
+              <button class="btn btn-edit" onclick="window.editAcc(${a.id})">Edit</button>
+              <button class="btn btn-del" onclick="window.delItem('accounts', ${a.id})">Hapus</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal Helpers
+    const modal = document.getElementById('crudModal');
+    const modalForm = document.getElementById('modalFormContainer');
+    const modalTitle = document.getElementById('modalTitle');
+    document.getElementById('closeModalBtn').addEventListener('click', () => modal.classList.remove('open'));
+
+    window.delItem = (collection, id) => {
+      if (!confirm('Hapus card ini?')) return;
+      state[collection] = state[collection].filter(x => x.id !== id);
+      persistState('Card berhasil dihapus.');
+    };
+
+    // Hero Save & Photo Upload
+    document.getElementById('inpPhotoFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        document.getElementById('inpPhotoUrl').value = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('saveHeroBtn').addEventListener('click', () => {
+      state.hero = {
+        signature: document.getElementById('inpSig').value.trim(),
+        badge: document.getElementById('inpBadge').value.trim(),
+        greetingTitle: document.getElementById('inpTitle').value.trim(),
+        greetingSubtitle: document.getElementById('inpSub').value.trim(),
+        portraitUrl: document.getElementById('inpPhotoUrl').value.trim(),
+        floatingBadgeRight: document.getElementById('inpFloatR').value.trim(),
+        floatingBadgeLeft: document.getElementById('inpFloatL').value.trim(),
+        resumeUrl: document.getElementById('inpResumeUrl').value.trim()
+      };
+      persistState('Data halaman Welcoming berhasil disimpan!');
+    });
+
+    // Skill Modal
+    window.editSkill = (id = null) => {
+      const item = id ? state.competencies.find(x => x.id === id) : { name: '', level: 5 };
+      modalTitle.textContent = id ? 'Edit Kompetensi' : 'Tambah Kompetensi Baru';
+      modalForm.innerHTML = `
+        <div class="form-group"><label>Nama Kompetensi *</label><input id="mSkillName" class="input" value="${item.name}" /></div>
+        <div class="form-group">
+          <label>Level Bar Putus-putus (1 s/d 5) *</label>
+          <select id="mSkillLevel" class="select">
+            <option value="1" ${item.level === 1 ? 'selected' : ''}>1 - Beginner</option>
+            <option value="2" ${item.level === 2 ? 'selected' : ''}>2 - Intermediate</option>
+            <option value="3" ${item.level === 3 ? 'selected' : ''}>3 - Advanced</option>
+            <option value="4" ${item.level === 4 ? 'selected' : ''}>4 - Professional</option>
+            <option value="5" ${item.level === 5 ? 'selected' : ''}>5 - Expert</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const name = document.getElementById('mSkillName').value.trim();
+        const level = parseInt(document.getElementById('mSkillLevel').value, 10);
+        if (!name) return alert('Nama kompetensi wajib diisi.');
+        if (id) {
+          const idx = state.competencies.findIndex(x => x.id === id);
+          state.competencies[idx] = { id, name, level };
+        } else {
+          state.competencies.push({ id: Date.now(), name, level });
+        }
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+    document.getElementById('addSkillBtn').onclick = () => window.editSkill(null);
+
+    // Experience Modal
+    window.editExp = (id = null) => {
+      const item = id ? state.experiences.find(x => x.id === id) : { company: '', role: '', period: '', bannerColor: '#55198b', summary: '', metrics: [] };
+      modalTitle.textContent = id ? 'Edit Card Pengalaman' : 'Tambah Card Pengalaman';
+      modalForm.innerHTML = `
+        <div class="grid-2">
+          <div class="form-group"><label>Instansi / Lab *</label><input id="mExpComp" class="input" value="${item.company}" /></div>
+          <div class="form-group"><label>Warna Header Banner</label><input id="mExpColor" class="input" value="${item.bannerColor}" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group"><label>Role / Posisi *</label><input id="mExpRole" class="input" value="${item.role}" /></div>
+          <div class="form-group"><label>Periode *</label><input id="mExpPeriod" class="input" value="${item.period}" /></div>
+        </div>
+        <div class="form-group"><label>Ringkasan Pekerjaan *</label><textarea id="mExpSum" class="textarea" rows="3">${item.summary}</textarea></div>
+        <div class="form-group"><label>Metrik Utama (Pisahkan dengan koma)</label><input id="mExpMetrics" class="input" value="${(item.metrics || []).join(', ')}" /></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const payload = {
+          id: id || Date.now(),
+          company: document.getElementById('mExpComp').value.trim(),
+          role: document.getElementById('mExpRole').value.trim(),
+          period: document.getElementById('mExpPeriod').value.trim(),
+          bannerColor: document.getElementById('mExpColor').value.trim() || '#55198b',
+          summary: document.getElementById('mExpSum').value.trim(),
+          metrics: document.getElementById('mExpMetrics').value.split(',').map(s => s.trim()).filter(Boolean)
+        };
+        if (id) {
+          const idx = state.experiences.findIndex(x => x.id === id);
+          state.experiences[idx] = payload;
+        } else {
+          state.experiences.unshift(payload);
+        }
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+    document.getElementById('addExpBtn').onclick = () => window.editExp(null);
+
+    // Education Edit
+    window.editEdu = () => {
+      const ed = state.education;
+      modalTitle.textContent = 'Edit Pendidikan Utama';
+      modalForm.innerHTML = `
+        <div class="form-group"><label>Universitas</label><input id="mEduInst" class="input" value="${ed.institution}" /></div>
+        <div class="grid-2">
+          <div class="form-group"><label>Gelar</label><input id="mEduDeg" class="input" value="${ed.degree}" /></div>
+          <div class="form-group"><label>IPK</label><input id="mEduGpa" class="input" value="${ed.gpa}" /></div>
+        </div>
+        <div class="form-group"><label>Periode</label><input id="mEduPer" class="input" value="${ed.period}" /></div>
+        <div class="form-group"><label>Judul Skripsi</label><textarea id="mEduTh" class="textarea" rows="2">${ed.thesis}</textarea></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Pendidikan</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        state.education = {
+          ...state.education,
+          institution: document.getElementById('mEduInst').value.trim(),
+          degree: document.getElementById('mEduDeg').value.trim(),
+          gpa: document.getElementById('mEduGpa').value.trim(),
+          period: document.getElementById('mEduPer').value.trim(),
+          thesis: document.getElementById('mEduTh').value.trim()
+        };
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+
+    // Certification Modal
+    window.editCert = (id = null) => {
+      const item = id ? state.certifications.find(x => x.id === id) : { name: '', issuer: '', issuedDate: '', expiryDate: '', detail: '', credentialUrl: 'https://' };
+      modalTitle.textContent = id ? 'Edit Card Sertifikat' : 'Tambah Card Sertifikat';
+      modalForm.innerHTML = `
+        <div class="grid-2">
+          <div class="form-group"><label>Nama Sertifikat *</label><input id="mCertName" class="input" value="${item.name}" /></div>
+          <div class="form-group"><label>Issuer (Penerbit) *</label><input id="mCertIssuer" class="input" value="${item.issuer}" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group"><label>Bulan & Tahun Terbit (Wajib) *</label><input id="mCertIssued" class="input" value="${item.issuedDate}" placeholder="Mei 2026" /></div>
+          <div class="form-group"><label>Bulan & Tahun Kadaluarsa (Opsional)</label><input id="mCertExp" class="input" value="${item.expiryDate}" placeholder="Kosongkan jika seumur hidup" /></div>
+        </div>
+        <div class="form-group"><label>Detail Kompetensi *</label><textarea id="mCertDet" class="textarea" rows="3">${item.detail}</textarea></div>
+        <div class="form-group"><label>URL Kredensial *</label><input id="mCertUrl" class="input" value="${item.credentialUrl}" /></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Sertifikat</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const payload = {
+          id: id || Date.now(),
+          name: document.getElementById('mCertName').value.trim(),
+          issuer: document.getElementById('mCertIssuer').value.trim(),
+          issuedDate: document.getElementById('mCertIssued').value.trim(),
+          expiryDate: document.getElementById('mCertExp').value.trim(),
+          detail: document.getElementById('mCertDet').value.trim(),
+          credentialUrl: document.getElementById('mCertUrl').value.trim()
+        };
+        if (!payload.name || !payload.issuer || !payload.issuedDate) return alert('Nama, Issuer, dan Bulan/Tahun Terbit wajib diisi.');
+        if (id) {
+          const idx = state.certifications.findIndex(x => x.id === id);
+          state.certifications[idx] = payload;
+        } else {
+          state.certifications.unshift(payload);
+        }
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+    document.getElementById('addCertBtn').onclick = () => window.editCert(null);
+
+    // Publication / Article Modal
+    window.editPub = (id = null) => {
+      const item = id ? state.publications.find(x => x.id === id) : { type: 'Publikasi Ilmiah', title: '', publisher: '', summary: '', url: 'https://' };
+      modalTitle.textContent = id ? 'Edit Publikasi / Artikel' : 'Tambah Publikasi / Artikel';
+      modalForm.innerHTML = `
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Kategori *</label>
+            <select id="mPubType" class="select">
+              <option value="Publikasi Ilmiah" ${item.type === 'Publikasi Ilmiah' ? 'selected' : ''}>Publikasi Ilmiah</option>
+              <option value="Artikel Eksternal" ${item.type === 'Artikel Eksternal' ? 'selected' : ''}>Artikel Eksternal</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Penerbit / Kompetisi & Tahun *</label><input id="mPubMeta" class="input" value="${item.publisher}" /></div>
+        </div>
+        <div class="form-group"><label>Judul *</label><input id="mPubTitle" class="input" value="${item.title}" /></div>
+        <div class="form-group"><label>Ringkasan *</label><textarea id="mPubSum" class="textarea" rows="3">${item.summary}</textarea></div>
+        <div class="form-group"><label>Redirect URL (Dibuka saat kartu diklik) *</label><input id="mPubUrl" class="input" value="${item.url}" /></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Publikasi / Artikel</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const payload = {
+          id: id || Date.now(),
+          type: document.getElementById('mPubType').value,
+          title: document.getElementById('mPubTitle').value.trim(),
+          publisher: document.getElementById('mPubMeta').value.trim(),
+          summary: document.getElementById('mPubSum').value.trim(),
+          url: document.getElementById('mPubUrl').value.trim()
+        };
+        if (!payload.title || !payload.url) return alert('Judul dan URL Redirect wajib diisi.');
+        if (id) {
+          const idx = state.publications.findIndex(x => x.id === id);
+          state.publications[idx] = payload;
+        } else {
+          state.publications.unshift(payload);
+        }
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+    document.getElementById('addPubBtn').onclick = () => window.editPub(null);
+
+    // Account Modal
+    window.editAcc = (id = null) => {
+      const item = id ? state.accounts.find(x => x.id === id) : { category: '', label: '', url: '' };
+      modalTitle.textContent = id ? 'Edit Akun & Kontak' : 'Tambah Akun Baru';
+      modalForm.innerHTML = `
+        <div class="form-group"><label>Kategori Akun (Email / LinkedIn / No. Telp / Publikasi) *</label><input id="mAccCat" class="input" value="${item.category}" /></div>
+        <div class="form-group"><label>Label Tampil *</label><input id="mAccLbl" class="input" value="${item.label}" /></div>
+        <div class="form-group"><label>URL / mailto: / tel: *</label><input id="mAccUrl" class="input" value="${item.url}" /></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Akun</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const payload = {
+          id: id || Date.now(),
+          category: document.getElementById('mAccCat').value.trim(),
+          label: document.getElementById('mAccLbl').value.trim(),
+          url: document.getElementById('mAccUrl').value.trim()
+        };
+        if (!payload.category || !payload.label) return alert('Data akun wajib dilengkapi.');
+        if (id) {
+          const idx = state.accounts.findIndex(x => x.id === id);
+          state.accounts[idx] = payload;
+        } else {
+          state.accounts.push(payload);
+        }
+        modal.classList.remove('open');
+        persistState();
+      };
+    };
+    document.getElementById('addAccBtn').onclick = () => window.editAcc(null);
+
+    // Export JSON & Reset
+    document.getElementById('exportJsonBtn').onclick = () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'portfolioData.json';
+      a.click();
+    };
+
+    document.getElementById('resetDefaultBtn').onclick = () => {
+      if (!confirm('Kembalikan semua data ke bawaan awal?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state = loadState();
+      renderAdmin();
+      showToast('Data dikembalikan ke pengaturan awal.');
+    };
+
+    // Sidebar Navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cms-sec').forEach(s => s.classList.remove('active'));
+        document.getElementById('sec-' + btn.getAttribute('data-sec')).classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    renderAdmin();
+  </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+---
+import initialData from '../data/portfolioData.json';
+import '../styles/portfolio.css';
+---
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anisah Rihadatul Aisy, S.Si. | Chemistry R&D & Quality Control Portfolio</title>
+  <meta name="description" content="Portofolio Profesional Anisah Rihadatul Aisy, S.Si. - Sarjana Kimia Universitas Brawijaya, R&D Formulator, Analytical Chemist & Quality Control Specialist." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="header">
+    <button class="logo" id="logoHomeBtn" aria-label="Home">
+      <span class="grey-color">&lt;</span>
+      <span class="logo-name" id="viewSignature">{initialData.hero.signature}</span>
+      <span class="grey-color">/&gt;</span>
+    </button>
+
+    <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+
+    <ul class="menu" id="navMenu">
+      <li><button class="menu-btn active" data-target="greeting">Overview</button></li>
+      <li><button class="menu-btn" data-target="skills">Skills & Lab</button></li>
+      <li><button class="menu-btn" data-target="experiences">Experiences</button></li>
+      <li><button class="menu-btn" data-target="credentials">Education & Certs</button></li>
+      <li><button class="menu-btn" data-target="publications">Publications</button></li>
+      <li><button class="menu-btn" data-target="contact">Contact</button></li>
+      <li>
+        <label class="theme-switch" title="Switch Light or Dark Mode">
+          <input type="checkbox" id="themeToggleInput" />
+          <span class="slider">
+            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </span>
+        </label>
+      </li>
+    </ul>
+  </header>
+
+  <!-- MULTI-PAGE CONTENT STAGE -->
+  <main class="main-stage">
+
+    <!-- PAGE 1: GREETING & FRAMELESS CUTOUT PHOTO -->
+    <section id="page-greeting" class="page-view active">
+      <div class="greet-grid">
+        <div>
+          <span class="hero-badge" id="viewHeroBadge">{initialData.hero.badge}</span>
+          <h1 class="greeting-title" id="viewGreetingTitle">{initialData.hero.greetingTitle}</h1>
+          <p class="greeting-p" id="viewGreetingSub">{initialData.hero.greetingSubtitle}</p>
+
+          <div class="social-row">
+            <a href="#contact" class="social-btn bg-mail" data-jump="contact" title="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </a>
+            <a href="#contact" class="social-btn bg-linkedin" data-jump="contact" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#publications" class="social-btn bg-purple" data-jump="publications" title="Scientific Publications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </a>
+            <a href="#contact" class="social-btn bg-dark" data-jump="contact" title="Direct Phone">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </a>
+          </div>
+
+          <div class="btn-group">
+            <button class="main-button" data-jump="contact">Contact Me</button>
+            <a class="main-button" id="viewResumeBtn" href={initialData.hero.resumeUrl} target="_blank" rel="noopener noreferrer">Download Resume</a>
+          </div>
+        </div>
+
+        <!-- FRAMELESS TRANSPARENT PORTRAIT STAGE -->
+        <div class="frameless-stage">
+          <div class="aura-backdrop"></div>
+          <svg class="orbit-halo" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="168" stroke="#8c43ce" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="8 6">
+              <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="28s" repeatCount="indefinite"/>
+            </circle>
+            <ellipse cx="200" cy="200" rx="185" ry="70" stroke="#aaa5ff" stroke-opacity="0.35" stroke-width="1.5" transform="rotate(-18 200 200)"/>
+          </svg>
+
+          <div class="floating-pill pill-top-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8c43ce" stroke-width="2"><polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/></svg>
+            <span id="viewBadgeRight">{initialData.hero.floatingBadgeRight}</span>
+          </div>
+
+          <div class="floating-pill pill-bottom-left">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8c43ce" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span id="viewBadgeLeft">{initialData.hero.floatingBadgeLeft}</span>
+          </div>
+
+          <div class="cutout-img-holder">
+            <img id="viewPortraitImg" src={initialData.hero.portraitUrl} alt="Anisah Rihadatul Aisy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: SKILLS & 5-LEVEL SEGMENTED DASHED BAR -->
+    <section id="page-skills" class="page-view">
+      <h2 class="section-heading">Skills & Laboratory Proficiency</h2>
+      <p class="section-subtitle">Penguasaan instrumen analitik kimia, formulasi R&D, serta standar manajemen mutu laboratorium.</p>
+
+      <div class="skills-layout">
+        <ul class="instrument-grid" id="viewInstrumentGrid"></ul>
+        <div class="competency-list" id="viewCompetencyList"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: WORK & LABORATORY EXPERIENCES -->
+    <section id="page-experiences" class="page-view">
+      <h2 class="section-heading">Work & Laboratory Experiences</h2>
+      <p class="section-subtitle">Rekam jejak riset formulasi NLC, pengujian mutu forensik dan lingkungan, serta pengajaran praktikum.</p>
+      <div class="cards-grid-3" id="viewExperiencesGrid"></div>
+    </section>
+
+    <!-- PAGE 4: EDUCATION & CERTIFICATIONS -->
+    <section id="page-credentials" class="page-view">
+      <h2 class="section-heading">Education & Certifications</h2>
+      <p class="section-subtitle">Kualifikasi akademik dan rincian sertifikasi kompetensi industri beserta tautan kredensialnya.</p>
+
+      <div class="edu-card" id="viewEducationBox"></div>
+      <div class="cards-grid-3" id="viewCertificationsGrid"></div>
+    </section>
+
+    <!-- PAGE 5: PUBLICATIONS, SCIENTIFIC AWARDS & LEADERSHIP -->
+    <section id="page-publications" class="page-view">
+      <h2 class="section-heading">Publications & External Articles</h2>
+      <p class="section-subtitle">Klik pada kartu publikasi ilmiah atau artikel untuk langsung membuka situs penerbit terkait.</p>
+      <div class="cards-grid-2" id="viewPublicationsGrid"></div>
+
+      <h2 class="section-heading" style="margin-top: 48px; font-size: 28px;">Leadership & Science Outreach</h2>
+      <p class="section-subtitle">Kepemimpinan organisasi akademik, edukasi sains masyarakat, dan kepanitiaan nasional.</p>
+      <div class="cards-grid-2" id="viewLeadershipGrid"></div>
+    </section>
+
+    <!-- PAGE 6: CONTACT & VERIFIED ACCOUNTS -->
+    <section id="page-contact" class="page-view">
+      <h2 class="section-heading">Reach Out to Me</h2>
+      <p class="section-subtitle">Hubungi langsung melalui saluran resmi atau tinjau indeks publikasi dan profil profesional.</p>
+      <div class="cards-grid-3" id="viewAccountsGrid"></div>
+    </section>
+
+  </main>
+
+  <script id="initial-portfolio-json" type="application/json" set:html={JSON.stringify(initialData)}></script>
+
+  <script>
+    const STORAGE_KEY = 'anisah_portfolio_cms_data_v1';
+    const LEVEL_MAP = {
+      1: 'Beginner',
+      2: 'Intermediate',
+      3: 'Advanced',
+      4: 'Professional',
+      5: 'Expert'
+    };
+
+    const ICON_SVGS = {
+      chromatography: '<svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V8l4 6 4-10 4 12 2-4v8"/></svg>',
+      spectroscopy: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>',
+      wave: '<svg viewBox="0 0 24 24"><path d="M2 12c3-6 6-6 9 0s6 6 9 0"/><path d="M2 17c3-6 6-6 9 0s6 6 9 0"/></svg>',
+      molecule: '<svg viewBox="0 0 24 24"><polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/></svg>',
+      flask: '<svg viewBox="0 0 24 24"><path d="M9 3h6m-5 0v5l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/></svg>',
+      shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>'
+    };
+
+    function getActiveData() {
+      const defaults = JSON.parse(document.getElementById('initial-portfolio-json').textContent);
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : defaults;
+      } catch {
+        return defaults;
+      }
+    }
+
+    function renderPortfolio() {
+      const data = getActiveData();
+
+      // 1. Hero
+      document.getElementById('viewSignature').textContent = data.hero.signature;
+      document.getElementById('viewHeroBadge').textContent = data.hero.badge;
+      document.getElementById('viewGreetingTitle').textContent = data.hero.greetingTitle;
+      document.getElementById('viewGreetingSub').textContent = data.hero.greetingSubtitle;
+      document.getElementById('viewBadgeRight').textContent = data.hero.floatingBadgeRight;
+      document.getElementById('viewBadgeLeft').textContent = data.hero.floatingBadgeLeft;
+      document.getElementById('viewPortraitImg').src = data.hero.portraitUrl;
+      document.getElementById('viewResumeBtn').href = data.hero.resumeUrl;
+
+      // 2. Instrument Icons & 5-Level Segmented Bars
+      document.getElementById('viewInstrumentGrid').innerHTML = data.skillIcons.map(item => `
+        <li class="instrument-card">
+          ${ICON_SVGS[item.icon] || ICON_SVGS.molecule}
+          <div class="instrument-name">${item.name}</div>
+          <div class="instrument-cat">${item.category}</div>
+        </li>
+      `).join('');
+
+      document.getElementById('viewCompetencyList').innerHTML = data.competencies.map(comp => {
+        let segments = '';
+        for (let i = 1; i <= 5; i++) {
+          segments += `<div class="seg-item ${i <= comp.level ? 'active' : ''}"></div>`;
+        }
+        return `
+          <div>
+            <div class="comp-top">
+              <span class="comp-title">${comp.name}</span>
+              <span class="comp-level-right">${LEVEL_MAP[comp.level] || 'Expert'}</span>
+            </div>
+            <div class="segmented-5-bar">${segments}</div>
+          </div>
+        `;
+      }).join('');
+
+      // 3. Work Experiences
+      document.getElementById('viewExperiencesGrid').innerHTML = data.experiences.map(exp => `
+        <article class="experience-card">
+          <div class="experience-banner" style="background: ${exp.bannerColor || '#55198b'};">
+            <span class="experience-company">${exp.company}</span>
+            <div class="experience-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--buttonHover)" stroke-width="2">
+                <polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/>
+              </svg>
+            </div>
+          </div>
+          <div class="experience-body">
+            <div>
+              <h3 class="experience-role">${exp.role}</h3>
+              <span class="experience-period">${exp.period}</span>
+              <p class="experience-desc">${exp.summary}</p>
+            </div>
+            <div class="tag-list">
+              ${(exp.metrics || []).map(m => `<span class="purple-chip">${m}</span>`).join('')}
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // 4. Education & Certifications
+      const edu = data.education;
+      document.getElementById('viewEducationBox').innerHTML = `
+        <span class="purple-chip">${edu.period} | IPK ${edu.gpa}</span>
+        <h3 class="card-heading" style="font-size: 21px; margin-top: 10px;">${edu.institution} (${edu.degree})</h3>
+        <p class="card-paragraph" style="margin-top: 6px;"><strong>Skripsi:</strong> ${edu.thesis}</p>
+      `;
+
+      document.getElementById('viewCertificationsGrid').innerHTML = data.certifications.map(cert => {
+        const validity = cert.expiryDate && cert.expiryDate.trim() !== ''
+          ? `Berlaku: ${cert.issuedDate} s/d ${cert.expiryDate}`
+          : `Terbit: ${cert.issuedDate} (Berlaku Selamanya)`;
+        return `
+          <article class="detail-card">
+            <div>
+              <span class="purple-chip">${cert.issuer}</span>
+              <h3 class="card-heading">${cert.name}</h3>
+              <div class="card-meta-date">${validity}</div>
+              <p class="card-paragraph">${cert.detail}</p>
+            </div>
+            <a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" class="card-action-link">
+              <span>Lihat Kredensial</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </article>
+        `;
+      }).join('');
+
+      // 5. Publications & Leadership
+      document.getElementById('viewPublicationsGrid').innerHTML = data.publications.map(pub => `
+        <a href="${pub.url}" target="_blank" rel="noopener noreferrer" class="detail-card">
+          <div>
+            <span class="purple-chip">${pub.type}</span>
+            <h3 class="card-heading">${pub.title}</h3>
+            <div class="card-meta-date">${pub.publisher}</div>
+            <p class="card-paragraph">${pub.summary}</p>
+          </div>
+          <span class="card-action-link">
+            <span>Buka Publikasi / Artikel</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+      `).join('');
+
+      document.getElementById('viewLeadershipGrid').innerHTML = (data.leadership || []).map(lead => `
+        <article class="detail-card">
+          <div>
+            <span class="purple-chip">${lead.organization}</span>
+            <h3 class="card-heading">${lead.role}</h3>
+            <p class="card-paragraph">${lead.description}</p>
+          </div>
+        </article>
+      `).join('');
+
+      // 6. Accounts & Contact
+      document.getElementById('viewAccountsGrid').innerHTML = data.accounts.map(acc => `
+        <a href="${acc.url}" target="_blank" rel="noopener noreferrer" class="detail-card">
+          <div>
+            <span class="purple-chip">${acc.category}</span>
+            <h3 class="card-heading">${acc.label}</h3>
+            <p class="card-paragraph" style="word-break: break-all;">${acc.url}</p>
+          </div>
+          <span class="card-action-link">
+            <span>Hubungi / Buka Tautan</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+      `).join('');
+    }
+
+    // Navigation & Theme Switching
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.menu-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-target') === pageId);
+      });
+      document.getElementById('navMenu').classList.remove('open');
+    }
+
+    document.querySelectorAll('.menu-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchPage(btn.getAttribute('data-target')));
+    });
+
+    document.querySelectorAll('[data-jump]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchPage(el.getAttribute('data-jump'));
+      });
+    });
+
+    document.getElementById('logoHomeBtn').addEventListener('click', () => switchPage('greeting'));
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('navMenu').classList.toggle('open');
+    });
+
+    const themeInput = document.getElementById('themeToggleInput');
+    const savedTheme = localStorage.getItem('anisah_theme_mode') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeInput.checked = savedTheme === 'dark';
+
+    themeInput.addEventListener('change', () => {
+      const mode = themeInput.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', mode);
+      localStorage.setItem('anisah_theme_mode', mode);
+    });
+
+    renderPortfolio();
+  </script>
+</body>
+</html>
