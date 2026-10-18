@@ -308,6 +308,32 @@
       "description": "Mendampingi logistik dan koordinasi dua kontingen universitas tingkat nasional serta menjadi panitia bidang Karya Tulis Ilmiah."
     }
   ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Formulasi & Karakterisasi NLC-Cur-CTAB",
+      "description": "Pengembangan sistem penghantaran Nanostructured Lipid Carrier (NLC) bermuatan kurkuminoid dengan metode Phase Inversion Temperature (ukuran partikel 326 nm, konfirmasi LC-HRMS 98,3%).",
+      "accessUrl": "https://drive.google.com/"
+    },
+    {
+      "id": 2,
+      "title": "Optimasi Koagulasi PAC Air Bersih (PDAM Delta Tirta)",
+      "description": "Riset independen dan evaluasi jar test koagulan PAC (rentang 50–140 ppm) dengan capaian dosis optimum 90 ppm dan penurunan kekeruhan hingga 2,71 ± 0,5 NTU.",
+      "accessUrl": "https://drive.google.com/"
+    },
+    {
+      "id": 3,
+      "title": "SUPER-HUB: Slow-Release Urea Berbasis Keratin",
+      "description": "Inovasi matriks lepas lambat pupuk urea ramah lingkungan menggunakan biopolimer keratin hasil isolasi limbah bulu ayam (Peraih Gold Medal NASPO).",
+      "accessUrl": "https://drive.google.com/"
+    },
+    {
+      "id": 4,
+      "title": "Hydrogel-BAP: Functionalized Wound Covering",
+      "description": "Pengembangan pembalut luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa untuk akselerasi regenerasi jaringan (Peraih Silver Medal WYIIA).",
+      "accessUrl": "https://drive.google.com/"
+    }
+  ],
   "accounts": [
     {
       "id": 1,

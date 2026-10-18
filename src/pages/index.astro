@@ -35,6 +35,7 @@ import '../styles/portfolio.css';
       <li><button class="menu-btn" data-target="experiences">Experiences</button></li>
       <li><button class="menu-btn" data-target="credentials">Education & Certs</button></li>
       <li><button class="menu-btn" data-target="publications">Publications</button></li>
+      <li><button class="menu-btn" data-target="projects">Projects</button></li>
       <li><button class="menu-btn" data-target="contact">Contact</button></li>
       <li>
         <label class="theme-switch" title="Switch Light or Dark Mode">
@@ -145,7 +146,14 @@ import '../styles/portfolio.css';
       <div class="cards-grid-2" id="viewLeadershipGrid"></div>
     </section>
 
-    <!-- PAGE 6: CONTACT & VERIFIED ACCOUNTS -->
+    <!-- PAGE 6: PROJECTS & DATA ACCESS LINKS -->
+    <section id="page-projects" class="page-view">
+      <h2 class="section-heading">Projects & Data Access Links</h2>
+      <p class="section-subtitle">Klik tombol "Access" pada setiap kartu untuk membuka data proyek, dokumentasi, atau Google Drive terkait.</p>
+      <div class="cards-grid-2" id="viewProjectsGrid"></div>
+    </section>
+
+    <!-- PAGE 7: CONTACT & VERIFIED ACCOUNTS -->
     <section id="page-contact" class="page-view">
       <h2 class="section-heading">Reach Out to Me</h2>
       <p class="section-subtitle">Hubungi langsung melalui saluran resmi atau tinjau indeks publikasi dan profil profesional.</p>
@@ -179,7 +187,14 @@ import '../styles/portfolio.css';
       const defaults = JSON.parse(document.getElementById('initial-portfolio-json').textContent);
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? JSON.parse(saved) : defaults;
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (!parsed.projects || !Array.isArray(parsed.projects)) {
+            parsed.projects = defaults.projects || [];
+          }
+          return parsed;
+        }
+        return defaults;
       } catch {
         return defaults;
       }
@@ -301,7 +316,21 @@ import '../styles/portfolio.css';
         </article>
       `).join('');
 
-      // 6. Accounts & Contact
+      // 6. Projects
+      document.getElementById('viewProjectsGrid').innerHTML = (data.projects || []).map(proj => `
+        <article class="detail-card">
+          <div>
+            <h3 class="card-heading" style="margin-top:0;">${proj.title}</h3>
+            <p class="card-paragraph">${proj.description}</p>
+          </div>
+          <a href="${proj.accessUrl}" target="_blank" rel="noopener noreferrer" class="card-action-link">
+            <span>Access</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </article>
+      `).join('');
+
+      // 7. Accounts & Contact
       document.getElementById('viewAccountsGrid').innerHTML = data.accounts.map(acc => `
         <a href="${acc.url}" target="_blank" rel="noopener noreferrer" class="detail-card">
           <div>

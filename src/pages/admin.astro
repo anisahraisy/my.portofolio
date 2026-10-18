@@ -546,7 +546,8 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <li><button class="nav-btn" data-sec="exp"><span>03. Work Experiences</span><span class="count-badge" id="cnt-exp">6</span></button></li>
         <li><button class="nav-btn" data-sec="certs"><span>04. Education & Certs</span><span class="count-badge" id="cnt-certs">7</span></button></li>
         <li><button class="nav-btn" data-sec="pubs"><span>05. Publications & Link</span><span class="count-badge" id="cnt-pubs">6</span></button></li>
-        <li><button class="nav-btn" data-sec="acc"><span>06. Accounts & Kontak</span><span class="count-badge" id="cnt-acc">5</span></button></li>
+        <li><button class="nav-btn" data-sec="projects"><span>06. Projects & Data</span><span class="count-badge" id="cnt-projects">0</span></button></li>
+        <li><button class="nav-btn" data-sec="acc"><span>07. Accounts & Kontak</span><span class="count-badge" id="cnt-acc">5</span></button></li>
       </ul>
     </div>
     <div style="font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 12px; display:flex; flex-direction:column; gap:8px;">
@@ -680,11 +681,23 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <div class="grid-2" id="adminPubsGrid"></div>
       </section>
 
-      <!-- SECTION 6: ACCOUNTS & CONTACT -->
+      <!-- SECTION 6: PROJECTS & DATA ACCESS LINKS -->
+      <section id="sec-projects" class="cms-sec">
+        <div class="sec-head">
+          <div>
+            <h1>06. Projects & Data Access Links</h1>
+            <p>Kelola kartu Project beserta deskripsi dan tautan tombol "Access" (Google Drive / Data Proyek / Dokumentasi).</p>
+          </div>
+          <button class="btn btn-primary" id="addProjectBtn">+ Tambah Project</button>
+        </div>
+        <div class="grid-2" id="adminProjectsGrid"></div>
+      </section>
+
+      <!-- SECTION 7: ACCOUNTS & CONTACT -->
       <section id="sec-acc" class="cms-sec">
         <div class="sec-head">
           <div>
-            <h1>06. Accounts & Direct Contact Cards</h1>
+            <h1>07. Accounts & Direct Contact Cards</h1>
             <p>Kelola kartu Email, LinkedIn, Nomor Telepon/WhatsApp, Google Scholar, dan Situs Artikel.</p>
           </div>
           <button class="btn btn-primary" id="addAccBtn">+ Tambah Akun Baru</button>
@@ -719,7 +732,12 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       const fallback = JSON.parse(document.getElementById('default-json').textContent);
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : fallback;
+        const state = raw ? JSON.parse(raw) : fallback;
+        // Defensive: ensure projects array exists for backward compatibility
+        if (!state.projects || !Array.isArray(state.projects)) {
+          state.projects = fallback.projects || [];
+        }
+        return state;
       } catch {
         return fallback;
       }
@@ -754,6 +772,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       document.getElementById('cnt-exp').textContent = state.experiences.length;
       document.getElementById('cnt-certs').textContent = state.certifications.length;
       document.getElementById('cnt-pubs').textContent = state.publications.length;
+      document.getElementById('cnt-projects').textContent = state.projects.length;
       document.getElementById('cnt-acc').textContent = state.accounts.length;
 
       // 2. Skills
@@ -856,7 +875,27 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         </div>
       `).join('');
 
-      // 6. Accounts
+      // 6. Projects
+      document.getElementById('adminProjectsGrid').innerHTML = state.projects.map(proj => `
+        <div class="card">
+          <div>
+            <span class="pill">PROJECT</span>
+            <h3 class="card-title">${proj.title}</h3>
+            <p class="card-desc">${proj.description}</p>
+          </div>
+          <div class="card-foot">
+            <a href="${proj.accessUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 5px 12px; font-size: 12px;">
+              Access ↗
+            </a>
+            <div>
+              <button class="btn btn-edit" onclick="window.editProject(${proj.id})">Edit</button>
+              <button class="btn btn-del" onclick="window.delItem('projects', ${proj.id})">Hapus</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 7. Accounts
       document.getElementById('adminAccGrid').innerHTML = state.accounts.map(a => `
         <div class="card">
           <div>
@@ -1099,6 +1138,37 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       };
     };
     document.getElementById('addPubBtn').onclick = () => window.editPub(null);
+
+    // Project Modal
+    window.editProject = (id = null) => {
+      const item = id ? state.projects.find(x => x.id === id) : { title: '', description: '', accessUrl: 'https://' };
+      modalTitle.textContent = id ? 'Edit Project' : 'Tambah Project Baru';
+      modalForm.innerHTML = `
+        <div class="form-group"><label>Judul Project *</label><input id="mProjTitle" class="input" value="${item.title}" placeholder="Masukkan judul project" /></div>
+        <div class="form-group"><label>Deskripsi Project *</label><textarea id="mProjDesc" class="textarea" rows="4" placeholder="Masukkan deskripsi singkat project">${item.description}</textarea></div>
+        <div class="form-group"><label>Redirect Link Tombol "Access" (Drive / Data Project) *</label><input id="mProjUrl" class="input" value="${item.accessUrl}" placeholder="https://drive.google.com/..." /></div>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Project</button>
+      `;
+      modal.classList.add('open');
+      document.getElementById('mSaveBtn').onclick = () => {
+        const payload = {
+          id: id || Date.now(),
+          title: document.getElementById('mProjTitle').value.trim(),
+          description: document.getElementById('mProjDesc').value.trim(),
+          accessUrl: document.getElementById('mProjUrl').value.trim()
+        };
+        if (!payload.title || !payload.description || !payload.accessUrl) return alert('Judul, Deskripsi, dan URL Access wajib diisi.');
+        if (id) {
+          const idx = state.projects.findIndex(x => x.id === id);
+          state.projects[idx] = payload;
+        } else {
+          state.projects.unshift(payload);
+        }
+        modal.classList.remove('open');
+        persistState('Data project berhasil disimpan!');
+      };
+    };
+    document.getElementById('addProjectBtn').onclick = () => window.editProject(null);
 
     // Account Modal
     window.editAcc = (id = null) => {
