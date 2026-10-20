@@ -546,7 +546,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <li><button class="nav-btn" data-sec="exp"><span>03. Work Experiences</span><span class="count-badge" id="cnt-exp">6</span></button></li>
         <li><button class="nav-btn" data-sec="certs"><span>04. Education & Certs</span><span class="count-badge" id="cnt-certs">7</span></button></li>
         <li><button class="nav-btn" data-sec="pubs"><span>05. Publications & Link</span><span class="count-badge" id="cnt-pubs">6</span></button></li>
-        <li><button class="nav-btn" data-sec="projects"><span>06. Projects & Data</span><span class="count-badge" id="cnt-projects">0</span></button></li>
+        <li><button class="nav-btn" data-sec="projects"><span>06. Projects & Data</span><span class="count-badge" id="cnt-projects">4</span></button></li>
         <li><button class="nav-btn" data-sec="acc"><span>07. Accounts & Kontak</span><span class="count-badge" id="cnt-acc">5</span></button></li>
       </ul>
     </div>
@@ -649,7 +649,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <div class="sec-head">
           <div>
             <h1>03. Work & Laboratory Experiences</h1>
-            <p>Semua kartu pengalaman kerja, magang QC, dan asistensi lab yang sudah ada dapat diedit atau ditambah.</p>
+            <p>Semua kartu pengalaman kerja, magang QC, dan asistensi lab diurutkan otomatis dari yang terbaru (kiri atas) ke terlama (kanan bawah).</p>
           </div>
           <button class="btn btn-primary" id="addExpBtn">+ Tambah Card Pengalaman</button>
         </div>
@@ -661,7 +661,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <div class="sec-head">
           <div>
             <h1>04. Education & Certification Cards</h1>
-            <p>Bulan/Tahun Terbit wajib diisi, sedangkan Bulan/Tahun Kadaluarsa bersifat opsional.</p>
+            <p>Bulan & Tahun Terbit wajib diisi. Kartu sertifikasi otomatis diurutkan dari terbaru ke terlama.</p>
           </div>
           <button class="btn btn-primary" id="addCertBtn">+ Tambah Card Sertifikat</button>
         </div>
@@ -674,7 +674,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <div class="sec-head">
           <div>
             <h1>05. Publications & Artikel Situs Lain (Redirect URL)</h1>
-            <p>Kelola kartu Publikasi Ilmiah dan Artikel Eksternal beserta URL tujuan saat kartu diklik.</p>
+            <p>Kelola kartu Publikasi Ilmiah dan Artikel Eksternal, terurut kronologis dari yang terbaru ke terlama.</p>
           </div>
           <button class="btn btn-primary" id="addPubBtn">+ Tambah Publikasi / Artikel</button>
         </div>
@@ -686,7 +686,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         <div class="sec-head">
           <div>
             <h1>06. Projects & Data Access Links</h1>
-            <p>Kelola kartu Project beserta deskripsi dan tautan tombol "Access" (Google Drive / Data Proyek / Dokumentasi).</p>
+            <p>Kelola kartu Project beserta deskripsi dan tautan akses data, terurut kronologis dari project terbaru ke terlama.</p>
           </div>
           <button class="btn btn-primary" id="addProjectBtn">+ Tambah Project</button>
         </div>
@@ -723,6 +723,11 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
   <script id="default-json" type="application/json" set:html={JSON.stringify(initialData)}></script>
 
   <script>
+    import {
+      sortAllCollections,
+      formatYearMonthToIndo
+    } from '../utils/chronologicalSort.js';
+
     const STORAGE_KEY = 'anisah_portfolio_cms_data_v1';
     const LEVEL_LABELS = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced', 4: 'Professional', 5: 'Expert' };
 
@@ -732,19 +737,85 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       const fallback = JSON.parse(document.getElementById('default-json').textContent);
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        const state = raw ? JSON.parse(raw) : fallback;
+        const parsed = raw ? JSON.parse(raw) : fallback;
         // Defensive: ensure projects array exists for backward compatibility
-        if (!state.projects || !Array.isArray(state.projects)) {
-          state.projects = fallback.projects || [];
+        if (!parsed.projects || !Array.isArray(parsed.projects)) {
+          parsed.projects = fallback.projects || [];
         }
-        return state;
+        sortAllCollections(parsed);
+        return parsed;
       } catch {
+        sortAllCollections(fallback);
         return fallback;
       }
     }
 
+    async function autoSyncToGitHub(stateData) {
+      const token = localStorage.getItem('anisah_github_token');
+      const repo = localStorage.getItem('anisah_github_repo');
+      const branch = localStorage.getItem('anisah_github_branch') || 'main';
+      const path = 'src/data/portfolioData.json';
+
+      if (!token || !repo) return;
+
+      try {
+        const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+        const getRes = await fetch(apiUrl + `?ref=${branch}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        let sha = '';
+        if (getRes.ok) {
+          const fileData = await getRes.json();
+          sha = fileData.sha;
+        }
+
+        const contentStr = JSON.stringify(stateData, null, 2);
+        const bytes = new TextEncoder().encode(contentStr);
+        let binary = '';
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const b64Content = btoa(binary);
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'auto-sync: update portfolioData.json from Admin Panel',
+            content: b64Content,
+            sha: sha || undefined,
+            branch
+          })
+        });
+
+        if (putRes.ok) {
+          showToast('Sinkronisasi otomatis ke GitHub Repository berhasil!');
+        } else {
+          console.warn('GitHub Auto-Sync response status:', putRes.status);
+        }
+      } catch (err) {
+        console.warn('GitHub Auto-Sync error:', err);
+      }
+    }
+
     function persistState(msg = 'Perubahan berhasil disimpan!') {
+      sortAllCollections(state);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (typeof autoSyncToGitHub === 'function') {
+        try {
+          autoSyncToGitHub(state);
+        } catch (err) {
+          console.warn('Auto-sync execution error:', err);
+        }
+      }
       renderAdmin();
       showToast(msg);
     }
@@ -806,8 +877,11 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       document.getElementById('adminExpGrid').innerHTML = state.experiences.map(exp => `
         <div class="card">
           <div>
-            <div style="height:7px; border-radius:99px; background:${exp.bannerColor}; margin-bottom:10px;"></div>
-            <span class="pill">${exp.company}</span>
+            <div style="height:7px; border-radius:99px; background:${exp.bannerColor || '#55198b'}; margin-bottom:10px;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="pill">${exp.company}</span>
+              ${exp.isCurrent ? '<span style="font-size:11px; font-weight:700; color:var(--success); background:var(--success-soft); padding:2px 8px; border-radius:99px;">Aktif</span>' : ''}
+            </div>
             <h3 class="card-title">${exp.role}</h3>
             <div class="card-meta">${exp.period}</div>
             <p class="card-desc">${exp.summary}</p>
@@ -823,8 +897,8 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       `).join('');
 
       // 4. Education & Certifications
-      const ed = state.education;
-      document.getElementById('adminEduCard').innerHTML = `
+      const edList = Array.isArray(state.education) ? state.education : [state.education];
+      document.getElementById('adminEduCard').innerHTML = edList.map(ed => `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
           <div>
             <span class="pill">${ed.period} | IPK ${ed.gpa}</span>
@@ -833,14 +907,17 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
           </div>
           <button class="btn btn-edit" onclick="window.editEdu()">Edit Pendidikan</button>
         </div>
-      `;
+      `).join('');
 
       document.getElementById('adminCertsGrid').innerHTML = state.certifications.map(c => {
         const expInfo = c.expiryDate ? `Terbit: ${c.issuedDate} | Exp: ${c.expiryDate}` : `Terbit: ${c.issuedDate} (Tanpa Kadaluarsa)`;
         return `
           <div class="card">
             <div>
-              <span class="pill">${c.issuer}</span>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span class="pill">${c.issuer}</span>
+                ${c.issuedYearMonth ? `<span style="font-size:11px; font-weight:600; color:var(--primary);">${c.issuedYearMonth}</span>` : ''}
+              </div>
               <h3 class="card-title">${c.name}</h3>
               <div class="card-meta">${expInfo}</div>
               <p class="card-desc">${c.detail}</p>
@@ -860,7 +937,10 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       document.getElementById('adminPubsGrid').innerHTML = state.publications.map(p => `
         <div class="card">
           <div>
-            <span class="pill">${p.type}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="pill">${p.type}</span>
+              ${p.publishedDate ? `<span style="font-size:11px; font-weight:600; color:var(--primary);">${p.publishedDate}</span>` : ''}
+            </div>
             <h3 class="card-title">${p.title}</h3>
             <div class="card-meta">${p.publisher}</div>
             <p class="card-desc">${p.summary}</p>
@@ -879,8 +959,12 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
       document.getElementById('adminProjectsGrid').innerHTML = state.projects.map(proj => `
         <div class="card">
           <div>
-            <span class="pill">PROJECT</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="pill">PROJECT</span>
+              ${proj.periodLabel ? `<span style="font-size:11px; font-weight:600; color:var(--primary);">${proj.periodLabel}</span>` : ''}
+            </div>
             <h3 class="card-title">${proj.title}</h3>
+            <div class="card-meta">${proj.projectDate ? 'Waktu: ' + proj.projectDate : ''}</div>
             <p class="card-desc">${proj.description}</p>
           </div>
           <div class="card-foot">
@@ -988,32 +1072,108 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
 
     // Experience Modal
     window.editExp = (id = null) => {
-      const item = id ? state.experiences.find(x => x.id === id) : { company: '', role: '', period: '', bannerColor: '#55198b', summary: '', metrics: [] };
+      const item = id ? state.experiences.find(x => x.id === id) : { company: '', role: '', startDate: '', endDate: '', isCurrent: false, period: '', bannerColor: '#55198b', summary: '', metrics: [] };
       modalTitle.textContent = id ? 'Edit Card Pengalaman' : 'Tambah Card Pengalaman';
       modalForm.innerHTML = `
         <div class="grid-2">
-          <div class="form-group"><label>Instansi / Lab *</label><input id="mExpComp" class="input" value="${item.company}" /></div>
-          <div class="form-group"><label>Warna Header Banner</label><input id="mExpColor" class="input" value="${item.bannerColor}" /></div>
+          <div class="form-group"><label>Instansi / Perusahaan *</label><input id="mExpComp" class="input" value="${item.company || ''}" required /></div>
+          <div class="form-group"><label>Warna Header Banner</label><input id="mExpColor" class="input" value="${item.bannerColor || '#55198b'}" /></div>
         </div>
+        <div class="form-group"><label>Role / Posisi *</label><input id="mExpRole" class="input" value="${item.role || ''}" required /></div>
         <div class="grid-2">
-          <div class="form-group"><label>Role / Posisi *</label><input id="mExpRole" class="input" value="${item.role}" /></div>
-          <div class="form-group"><label>Periode *</label><input id="mExpPeriod" class="input" value="${item.period}" /></div>
+          <div class="form-group">
+            <label>Bulan & Tahun Mulai (Wajib) *</label>
+            <input type="month" id="mExpStart" class="input" value="${item.startDate || ''}" required />
+          </div>
+          <div class="form-group">
+            <label>Bulan & Tahun Selesai</label>
+            <input type="month" id="mExpEnd" class="input" value="${item.endDate && item.endDate !== 'present' ? item.endDate : ''}" ${item.isCurrent ? 'disabled' : ''} />
+          </div>
         </div>
-        <div class="form-group"><label>Ringkasan Pekerjaan *</label><textarea id="mExpSum" class="textarea" rows="3">${item.summary}</textarea></div>
+        <div class="form-group" style="margin-top:-6px;">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500;">
+            <input type="checkbox" id="mExpCurrent" ${item.isCurrent ? 'checked' : ''} />
+            <span>Masih Berlangsung (Sekarang / Ongoing)</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Periode Tampil (Otomatis / Kustom) *</label>
+          <input id="mExpPeriod" class="input" value="${item.period || ''}" placeholder="Contoh: Feb 2026 – Mei 2026" />
+          <small style="color:var(--text-muted); font-size:11.5px;">Otomatis terisi saat memilih bulan, atau sesuaikan bila diperlukan format teks kustom.</small>
+        </div>
+        <div class="form-group"><label>Ringkasan Pekerjaan *</label><textarea id="mExpSum" class="textarea" rows="3">${item.summary || ''}</textarea></div>
         <div class="form-group"><label>Metrik Utama (Pisahkan dengan koma)</label><input id="mExpMetrics" class="input" value="${(item.metrics || []).join(', ')}" /></div>
-        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan</button>
+        <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Pengalaman</button>
       `;
       modal.classList.add('open');
+
+      const startInput = document.getElementById('mExpStart');
+      const endInput = document.getElementById('mExpEnd');
+      const currentCheck = document.getElementById('mExpCurrent');
+      const periodInput = document.getElementById('mExpPeriod');
+
+      const autoFillExpPeriod = () => {
+        const startVal = startInput.value.trim();
+        const isCurrent = currentCheck.checked;
+        endInput.disabled = isCurrent;
+
+        const startLabel = formatYearMonthToIndo(startVal);
+        if (isCurrent) {
+          periodInput.value = startLabel ? `${startLabel} – Sekarang` : 'Sekarang';
+        } else {
+          const endVal = endInput.value.trim();
+          const endLabel = formatYearMonthToIndo(endVal);
+          if (startLabel && endLabel) {
+            periodInput.value = startLabel === endLabel ? startLabel : `${startLabel} – ${endLabel}`;
+          } else if (startLabel) {
+            periodInput.value = startLabel;
+          } else if (endLabel) {
+            periodInput.value = endLabel;
+          }
+        }
+      };
+
+      startInput.addEventListener('change', autoFillExpPeriod);
+      endInput.addEventListener('change', autoFillExpPeriod);
+      currentCheck.addEventListener('change', autoFillExpPeriod);
+
       document.getElementById('mSaveBtn').onclick = () => {
+        const company = document.getElementById('mExpComp').value.trim();
+        const role = document.getElementById('mExpRole').value.trim();
+        const startDate = startInput.value.trim();
+        const isCurrent = currentCheck.checked;
+        const endDate = isCurrent ? 'present' : endInput.value.trim();
+        let period = periodInput.value.trim();
+
+        if (!company || !role) {
+          return alert('Instansi dan Role wajib diisi.');
+        }
+
+        if (!period) {
+          const startLabel = formatYearMonthToIndo(startDate);
+          if (isCurrent) {
+            period = startLabel ? `${startLabel} – Sekarang` : 'Sekarang';
+          } else {
+            const endLabel = formatYearMonthToIndo(endDate);
+            period = startLabel && endLabel
+              ? (startLabel === endLabel ? startLabel : `${startLabel} – ${endLabel}`)
+              : (startLabel || endLabel || '');
+          }
+        }
+
         const payload = {
           id: id || Date.now(),
-          company: document.getElementById('mExpComp').value.trim(),
-          role: document.getElementById('mExpRole').value.trim(),
-          period: document.getElementById('mExpPeriod').value.trim(),
+          company,
+          role,
+          startDate,
+          endDate,
+          isCurrent,
+          period,
           bannerColor: document.getElementById('mExpColor').value.trim() || '#55198b',
           summary: document.getElementById('mExpSum').value.trim(),
           metrics: document.getElementById('mExpMetrics').value.split(',').map(s => s.trim()).filter(Boolean)
         };
+
         if (id) {
           const idx = state.experiences.findIndex(x => x.id === id);
           state.experiences[idx] = payload;
@@ -1021,69 +1181,157 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
           state.experiences.unshift(payload);
         }
         modal.classList.remove('open');
-        persistState();
+        persistState('Data pengalaman berhasil disimpan dan diurutkan!');
       };
     };
     document.getElementById('addExpBtn').onclick = () => window.editExp(null);
 
     // Education Edit
     window.editEdu = () => {
-      const ed = state.education;
+      const ed = Array.isArray(state.education) ? state.education[0] : state.education;
       modalTitle.textContent = 'Edit Pendidikan Utama';
       modalForm.innerHTML = `
-        <div class="form-group"><label>Universitas</label><input id="mEduInst" class="input" value="${ed.institution}" /></div>
+        <div class="form-group"><label>Universitas / Institusi *</label><input id="mEduInst" class="input" value="${ed.institution || ''}" /></div>
         <div class="grid-2">
-          <div class="form-group"><label>Gelar</label><input id="mEduDeg" class="input" value="${ed.degree}" /></div>
-          <div class="form-group"><label>IPK</label><input id="mEduGpa" class="input" value="${ed.gpa}" /></div>
+          <div class="form-group"><label>Gelar / Program Studi *</label><input id="mEduDeg" class="input" value="${ed.degree || ''}" /></div>
+          <div class="form-group"><label>IPK *</label><input id="mEduGpa" class="input" value="${ed.gpa || ''}" /></div>
         </div>
-        <div class="form-group"><label>Periode</label><input id="mEduPer" class="input" value="${ed.period}" /></div>
-        <div class="form-group"><label>Judul Skripsi</label><textarea id="mEduTh" class="textarea" rows="2">${ed.thesis}</textarea></div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Bulan & Tahun Mulai</label>
+            <input type="month" id="mEduStart" class="input" value="${ed.startDate || ''}" />
+          </div>
+          <div class="form-group">
+            <label>Bulan & Tahun Selesai</label>
+            <input type="month" id="mEduEnd" class="input" value="${ed.endDate || ''}" />
+          </div>
+        </div>
+        <div class="form-group"><label>Periode Tampil</label><input id="mEduPer" class="input" value="${ed.period || ''}" /></div>
+        <div class="form-group"><label>Judul Skripsi</label><textarea id="mEduTh" class="textarea" rows="2">${ed.thesis || ''}</textarea></div>
         <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Pendidikan</button>
       `;
       modal.classList.add('open');
+
+      const sInp = document.getElementById('mEduStart');
+      const eInp = document.getElementById('mEduEnd');
+      const pInp = document.getElementById('mEduPer');
+
+      const updateEduPeriod = () => {
+        const s = sInp.value.trim();
+        const e = eInp.value.trim();
+        if (s && e) {
+          pInp.value = `${formatYearMonthToIndo(s, false)} – ${formatYearMonthToIndo(e, false)}`;
+        }
+      };
+      sInp.addEventListener('change', updateEduPeriod);
+      eInp.addEventListener('change', updateEduPeriod);
+
       document.getElementById('mSaveBtn').onclick = () => {
-        state.education = {
-          ...state.education,
+        const updated = {
+          ...(Array.isArray(state.education) ? state.education[0] : state.education),
           institution: document.getElementById('mEduInst').value.trim(),
           degree: document.getElementById('mEduDeg').value.trim(),
           gpa: document.getElementById('mEduGpa').value.trim(),
-          period: document.getElementById('mEduPer').value.trim(),
+          startDate: sInp.value.trim(),
+          endDate: eInp.value.trim(),
+          period: pInp.value.trim(),
           thesis: document.getElementById('mEduTh').value.trim()
         };
+        if (Array.isArray(state.education)) {
+          state.education[0] = updated;
+        } else {
+          state.education = updated;
+        }
         modal.classList.remove('open');
-        persistState();
+        persistState('Data pendidikan berhasil disimpan!');
       };
     };
 
     // Certification Modal
     window.editCert = (id = null) => {
-      const item = id ? state.certifications.find(x => x.id === id) : { name: '', issuer: '', issuedDate: '', expiryDate: '', detail: '', credentialUrl: 'https://' };
+      const item = id ? state.certifications.find(x => x.id === id) : { name: '', issuer: '', issuedYearMonth: '', expiryYearMonth: '', issuedDate: '', expiryDate: '', detail: '', credentialUrl: 'https://' };
       modalTitle.textContent = id ? 'Edit Card Sertifikat' : 'Tambah Card Sertifikat';
       modalForm.innerHTML = `
         <div class="grid-2">
-          <div class="form-group"><label>Nama Sertifikat *</label><input id="mCertName" class="input" value="${item.name}" /></div>
-          <div class="form-group"><label>Issuer (Penerbit) *</label><input id="mCertIssuer" class="input" value="${item.issuer}" /></div>
+          <div class="form-group"><label>Nama Sertifikat *</label><input id="mCertName" class="input" value="${item.name || ''}" required /></div>
+          <div class="form-group"><label>Issuer (Penerbit) *</label><input id="mCertIssuer" class="input" value="${item.issuer || ''}" required /></div>
         </div>
         <div class="grid-2">
-          <div class="form-group"><label>Bulan & Tahun Terbit (Wajib) *</label><input id="mCertIssued" class="input" value="${item.issuedDate}" placeholder="Mei 2026" /></div>
-          <div class="form-group"><label>Bulan & Tahun Kadaluarsa (Opsional)</label><input id="mCertExp" class="input" value="${item.expiryDate}" placeholder="Kosongkan jika seumur hidup" /></div>
+          <div class="form-group">
+            <label>Bulan & Tahun Terbit (Wajib) *</label>
+            <input type="month" id="mCertIssuedYM" class="input" value="${item.issuedYearMonth || ''}" required />
+          </div>
+          <div class="form-group">
+            <label>Bulan & Tahun Kadaluarsa (Opsional)</label>
+            <input type="month" id="mCertExpYM" class="input" value="${item.expiryYearMonth || ''}" />
+          </div>
         </div>
-        <div class="form-group"><label>Detail Kompetensi *</label><textarea id="mCertDet" class="textarea" rows="3">${item.detail}</textarea></div>
-        <div class="form-group"><label>URL Kredensial *</label><input id="mCertUrl" class="input" value="${item.credentialUrl}" /></div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Label Teks Terbit</label>
+            <input id="mCertIssued" class="input" value="${item.issuedDate || ''}" placeholder="Contoh: Mei 2026" />
+          </div>
+          <div class="form-group">
+            <label>Label Teks Kadaluarsa (Opsional)</label>
+            <input id="mCertExp" class="input" value="${item.expiryDate || ''}" placeholder="Kosongkan jika seumur hidup" />
+          </div>
+        </div>
+        <div class="form-group"><label>Detail Kompetensi *</label><textarea id="mCertDet" class="textarea" rows="3">${item.detail || ''}</textarea></div>
+        <div class="form-group"><label>URL Kredensial *</label><input id="mCertUrl" class="input" value="${item.credentialUrl || 'https://'}" /></div>
         <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Sertifikat</button>
       `;
       modal.classList.add('open');
+
+      const issuedYMInput = document.getElementById('mCertIssuedYM');
+      const expYMInput = document.getElementById('mCertExpYM');
+      const issuedTextInput = document.getElementById('mCertIssued');
+      const expTextInput = document.getElementById('mCertExp');
+
+      issuedYMInput.addEventListener('change', (e) => {
+        const val = e.target.value.trim();
+        if (val) issuedTextInput.value = formatYearMonthToIndo(val);
+      });
+
+      expYMInput.addEventListener('change', (e) => {
+        const val = e.target.value.trim();
+        expTextInput.value = val ? formatYearMonthToIndo(val) : '';
+      });
+
       document.getElementById('mSaveBtn').onclick = () => {
+        const name = document.getElementById('mCertName').value.trim();
+        const issuer = document.getElementById('mCertIssuer').value.trim();
+        const issuedYearMonth = issuedYMInput.value.trim();
+        const expiryYearMonth = expYMInput.value.trim();
+        let issuedDate = issuedTextInput.value.trim();
+        let expiryDate = expTextInput.value.trim();
+
+        if (!name || !issuer) {
+          return alert('Nama sertifikat dan Issuer wajib diisi.');
+        }
+
+        if (!issuedYearMonth && !issuedDate) {
+          return alert('Bulan & Tahun Terbit wajib diisi.');
+        }
+
+        if (!issuedDate && issuedYearMonth) {
+          issuedDate = formatYearMonthToIndo(issuedYearMonth);
+        }
+        if (!expiryDate && expiryYearMonth) {
+          expiryDate = formatYearMonthToIndo(expiryYearMonth);
+        }
+
         const payload = {
           id: id || Date.now(),
-          name: document.getElementById('mCertName').value.trim(),
-          issuer: document.getElementById('mCertIssuer').value.trim(),
-          issuedDate: document.getElementById('mCertIssued').value.trim(),
-          expiryDate: document.getElementById('mCertExp').value.trim(),
+          name,
+          issuer,
+          issuedYearMonth,
+          expiryYearMonth,
+          issuedDate,
+          expiryDate,
           detail: document.getElementById('mCertDet').value.trim(),
-          credentialUrl: document.getElementById('mCertUrl').value.trim()
+          credentialUrl: document.getElementById('mCertUrl').value.trim() || 'https://'
         };
-        if (!payload.name || !payload.issuer || !payload.issuedDate) return alert('Nama, Issuer, dan Bulan/Tahun Terbit wajib diisi.');
+
         if (id) {
           const idx = state.certifications.findIndex(x => x.id === id);
           state.certifications[idx] = payload;
@@ -1091,14 +1339,14 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
           state.certifications.unshift(payload);
         }
         modal.classList.remove('open');
-        persistState();
+        persistState('Data sertifikat berhasil disimpan dan diurutkan!');
       };
     };
     document.getElementById('addCertBtn').onclick = () => window.editCert(null);
 
     // Publication / Article Modal
     window.editPub = (id = null) => {
-      const item = id ? state.publications.find(x => x.id === id) : { type: 'Publikasi Ilmiah', title: '', publisher: '', summary: '', url: 'https://' };
+      const item = id ? state.publications.find(x => x.id === id) : { type: 'Publikasi Ilmiah', title: '', publisher: '', publishedDate: '', summary: '', url: 'https://' };
       modalTitle.textContent = id ? 'Edit Publikasi / Artikel' : 'Tambah Publikasi / Artikel';
       modalForm.innerHTML = `
         <div class="grid-2">
@@ -1109,24 +1357,35 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
               <option value="Artikel Eksternal" ${item.type === 'Artikel Eksternal' ? 'selected' : ''}>Artikel Eksternal</option>
             </select>
           </div>
-          <div class="form-group"><label>Penerbit / Kompetisi & Tahun *</label><input id="mPubMeta" class="input" value="${item.publisher}" /></div>
+          <div class="form-group">
+            <label>Bulan & Tahun Publikasi / Penghargaan *</label>
+            <input type="month" id="mPubDate" class="input" value="${item.publishedDate || ''}" required />
+          </div>
         </div>
-        <div class="form-group"><label>Judul *</label><input id="mPubTitle" class="input" value="${item.title}" /></div>
-        <div class="form-group"><label>Ringkasan *</label><textarea id="mPubSum" class="textarea" rows="3">${item.summary}</textarea></div>
-        <div class="form-group"><label>Redirect URL (Dibuka saat kartu diklik) *</label><input id="mPubUrl" class="input" value="${item.url}" /></div>
+        <div class="form-group"><label>Penerbit / Penyelenggara & Tahun *</label><input id="mPubMeta" class="input" value="${item.publisher || ''}" placeholder="Contoh: Gold Medal NASPO · 2024" required /></div>
+        <div class="form-group"><label>Judul Publikasi / Artikel *</label><input id="mPubTitle" class="input" value="${item.title || ''}" required /></div>
+        <div class="form-group"><label>Ringkasan *</label><textarea id="mPubSum" class="textarea" rows="3">${item.summary || ''}</textarea></div>
+        <div class="form-group"><label>Redirect URL (Dibuka saat kartu diklik) *</label><input id="mPubUrl" class="input" value="${item.url || 'https://'}" required /></div>
         <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Publikasi / Artikel</button>
       `;
       modal.classList.add('open');
       document.getElementById('mSaveBtn').onclick = () => {
+        const title = document.getElementById('mPubTitle').value.trim();
+        const url = document.getElementById('mPubUrl').value.trim();
+        const publishedDate = document.getElementById('mPubDate').value.trim();
+
+        if (!title || !url) return alert('Judul dan URL Redirect wajib diisi.');
+
         const payload = {
           id: id || Date.now(),
           type: document.getElementById('mPubType').value,
-          title: document.getElementById('mPubTitle').value.trim(),
+          title,
           publisher: document.getElementById('mPubMeta').value.trim(),
+          publishedDate,
           summary: document.getElementById('mPubSum').value.trim(),
-          url: document.getElementById('mPubUrl').value.trim()
+          url
         };
-        if (!payload.title || !payload.url) return alert('Judul dan URL Redirect wajib diisi.');
+
         if (id) {
           const idx = state.publications.findIndex(x => x.id === id);
           state.publications[idx] = payload;
@@ -1134,30 +1393,66 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
           state.publications.unshift(payload);
         }
         modal.classList.remove('open');
-        persistState();
+        persistState('Data publikasi berhasil disimpan dan diurutkan!');
       };
     };
     document.getElementById('addPubBtn').onclick = () => window.editPub(null);
 
     // Project Modal
     window.editProject = (id = null) => {
-      const item = id ? state.projects.find(x => x.id === id) : { title: '', description: '', accessUrl: 'https://' };
+      const item = id ? state.projects.find(x => x.id === id) : { title: '', projectDate: '', periodLabel: '', description: '', accessUrl: 'https://drive.google.com/' };
       modalTitle.textContent = id ? 'Edit Project' : 'Tambah Project Baru';
       modalForm.innerHTML = `
-        <div class="form-group"><label>Judul Project *</label><input id="mProjTitle" class="input" value="${item.title}" placeholder="Masukkan judul project" /></div>
-        <div class="form-group"><label>Deskripsi Project *</label><textarea id="mProjDesc" class="textarea" rows="4" placeholder="Masukkan deskripsi singkat project">${item.description}</textarea></div>
-        <div class="form-group"><label>Redirect Link Tombol "Access" (Drive / Data Project) *</label><input id="mProjUrl" class="input" value="${item.accessUrl}" placeholder="https://drive.google.com/..." /></div>
+        <div class="grid-2">
+          <div class="form-group"><label>Judul Project *</label><input id="mProjTitle" class="input" value="${item.title || ''}" placeholder="Masukkan judul project" required /></div>
+          <div class="form-group">
+            <label>Bulan & Tahun Project *</label>
+            <input type="month" id="mProjDate" class="input" value="${item.projectDate || ''}" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Label Periode Tampil (Otomatis / Kustom)</label>
+          <input id="mProjPeriod" class="input" value="${item.periodLabel || ''}" placeholder="Contoh: Des 2025" />
+          <small style="color:var(--text-muted); font-size:11.5px;">Otomatis terisi saat memilih bulan, atau sesuaikan bila diperlukan.</small>
+        </div>
+        <div class="form-group"><label>Deskripsi Project *</label><textarea id="mProjDesc" class="textarea" rows="4" placeholder="Masukkan deskripsi singkat project">${item.description || ''}</textarea></div>
+        <div class="form-group"><label>Redirect Link Tombol "Access" (Drive / Data Project) *</label><input id="mProjUrl" class="input" value="${item.accessUrl || 'https://drive.google.com/'}" placeholder="https://drive.google.com/..." required /></div>
         <button class="btn btn-primary" id="mSaveBtn" style="width:100%; justify-content:center;">Simpan Project</button>
       `;
       modal.classList.add('open');
+
+      const projDateInput = document.getElementById('mProjDate');
+      const projPeriodInput = document.getElementById('mProjPeriod');
+
+      projDateInput.addEventListener('change', (e) => {
+        const val = e.target.value.trim();
+        if (val) projPeriodInput.value = formatYearMonthToIndo(val);
+      });
+
       document.getElementById('mSaveBtn').onclick = () => {
+        const title = document.getElementById('mProjTitle').value.trim();
+        const description = document.getElementById('mProjDesc').value.trim();
+        const accessUrl = document.getElementById('mProjUrl').value.trim();
+        const projectDate = projDateInput.value.trim();
+        let periodLabel = projPeriodInput.value.trim();
+
+        if (!title || !description || !accessUrl) {
+          return alert('Judul, Deskripsi, dan URL Access wajib diisi.');
+        }
+
+        if (!periodLabel && projectDate) {
+          periodLabel = formatYearMonthToIndo(projectDate);
+        }
+
         const payload = {
           id: id || Date.now(),
-          title: document.getElementById('mProjTitle').value.trim(),
-          description: document.getElementById('mProjDesc').value.trim(),
-          accessUrl: document.getElementById('mProjUrl').value.trim()
+          title,
+          projectDate,
+          periodLabel,
+          description,
+          accessUrl
         };
-        if (!payload.title || !payload.description || !payload.accessUrl) return alert('Judul, Deskripsi, dan URL Access wajib diisi.');
+
         if (id) {
           const idx = state.projects.findIndex(x => x.id === id);
           state.projects[idx] = payload;
@@ -1165,7 +1460,7 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
           state.projects.unshift(payload);
         }
         modal.classList.remove('open');
-        persistState('Data project berhasil disimpan!');
+        persistState('Data project berhasil disimpan dan diurutkan!');
       };
     };
     document.getElementById('addProjectBtn').onclick = () => window.editProject(null);

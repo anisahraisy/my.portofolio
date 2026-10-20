@@ -165,6 +165,8 @@ import '../styles/portfolio.css';
   <script id="initial-portfolio-json" type="application/json" set:html={JSON.stringify(initialData)}></script>
 
   <script>
+    import { sortAllCollections } from '../utils/chronologicalSort.js';
+
     const STORAGE_KEY = 'anisah_portfolio_cms_data_v1';
     const LEVEL_MAP = {
       1: 'Beginner',
@@ -192,11 +194,11 @@ import '../styles/portfolio.css';
           if (!parsed.projects || !Array.isArray(parsed.projects)) {
             parsed.projects = defaults.projects || [];
           }
-          return parsed;
+          return sortAllCollections(parsed);
         }
-        return defaults;
+        return sortAllCollections(defaults);
       } catch {
-        return defaults;
+        return sortAllCollections(defaults);
       }
     }
 
@@ -264,11 +266,12 @@ import '../styles/portfolio.css';
 
       // 4. Education & Certifications
       const edu = data.education;
-      document.getElementById('viewEducationBox').innerHTML = `
-        <span class="purple-chip">${edu.period} | IPK ${edu.gpa}</span>
-        <h3 class="card-heading" style="font-size: 21px; margin-top: 10px;">${edu.institution} (${edu.degree})</h3>
-        <p class="card-paragraph" style="margin-top: 6px;"><strong>Skripsi:</strong> ${edu.thesis}</p>
-      `;
+      const eduList = Array.isArray(edu) ? edu : [edu];
+      document.getElementById('viewEducationBox').innerHTML = eduList.map(item => `
+        <span class="purple-chip">${item.period} | IPK ${item.gpa}</span>
+        <h3 class="card-heading" style="font-size: 21px; margin-top: 10px;">${item.institution} (${item.degree})</h3>
+        <p class="card-paragraph" style="margin-top: 6px;"><strong>Skripsi:</strong> ${item.thesis}</p>
+      `).join('');
 
       document.getElementById('viewCertificationsGrid').innerHTML = data.certifications.map(cert => {
         const validity = cert.expiryDate && cert.expiryDate.trim() !== ''
@@ -320,6 +323,7 @@ import '../styles/portfolio.css';
       document.getElementById('viewProjectsGrid').innerHTML = (data.projects || []).map(proj => `
         <article class="detail-card">
           <div>
+            ${proj.periodLabel ? `<span class="purple-chip" style="margin-bottom:8px; display:inline-block;">${proj.periodLabel}</span>` : ''}
             <h3 class="card-heading" style="margin-top:0;">${proj.title}</h3>
             <p class="card-paragraph">${proj.description}</p>
           </div>

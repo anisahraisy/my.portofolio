@@ -20,7 +20,9 @@
       "Best Student pada Student Mobility Program, Universiti Malaysia Terengganu 2025",
       "Research Assistant Physical Chemistry Lab & Laboratory Assistant (Biochemistry & Organic Chemistry)",
       "Wakil Kepala Bidang Quranic Scientific Writing & App Design Universitas Brawijaya"
-    ]
+    ],
+    "startDate": "2022-08",
+    "endDate": "2026-07"
   },
   "skillIcons": [
     {
@@ -89,58 +91,6 @@
   ],
   "experiences": [
     {
-      "id": 1792506231049,
-      "company": "SD Muhammadiyah Malang",
-      "role": "Science Outreach Educator",
-      "period": "December 2025",
-      "bannerColor": "#55198b",
-      "summary": "Served as a Science Outreach Educator delivering interactive science sessions to a total of 104 4th-grade elementary students. Explained acid-base concepts, density, and simple science experiments through hands-on practice while simplifying complex scientific concepts for young learners.",
-      "metrics": [
-        "104 Elementary Students",
-        "Interactive Science Outreach",
-        "Acid-Base & Density Practice"
-      ]
-    },
-    {
-      "id": 1792505766367,
-      "company": "Brawijaya University",
-      "role": "Staff for the Quranic Scholarly Writing Division (GBQN X 2024)",
-      "period": "October 2024",
-      "bannerColor": "#55198b",
-      "summary": "Targeted over 30 writing student organizations across various universities to expand the outreach and dissemination of MKTIA competition information. Compiled and managed a total of 62 Quranic Scientific Papers while coordinating with judges to support the participant presentation evaluation process.",
-      "metrics": [
-        "30+ University Orgs",
-        "62 Scientific Papers",
-        "Judge Coordination"
-      ]
-    },
-    {
-      "id": 1792503414155,
-      "company": "UKM Seni Religi - Brawijaya University",
-      "role": "Vice Head of Qur'anic Scientific Writing & App Design",
-      "period": "February - December 2025",
-      "bannerColor": "#55198b",
-      "summary": "Coordinated a 5 member team and managed weekly mentoring sessions, including preparing and delivering mentoring materials while closely monitoring members' project progress. Strengthened leadership, teamwork, communication, and scientific writing capabilities within the organization.",
-      "metrics": [
-        "5 Member Team Coordination",
-        "Weekly Mentoring Sessions",
-        "Scientific Writing"
-      ]
-    },
-    {
-      "id": 1792503287248,
-      "company": "Young On Top Malang",
-      "role": "Staff Energy & Green",
-      "period": "January 2025 - January 2026",
-      "bannerColor": "#55198b",
-      "summary": "Served dual roles as Staff of Energy and Green divisions at Young On Top Malang, organizing routine activities and supporting the execution of community driven volunteer projects focusing on public health and environmental sustainability.",
-      "metrics": [
-        "Energy & Green Divisions",
-        "Project Management",
-        "Community Volunteering"
-      ]
-    },
-    {
       "id": 1,
       "company": "Brawijaya University",
       "role": "Laboratory Assistant (Biochemistry Lab)",
@@ -151,7 +101,10 @@
         "6 Practical Sessions",
         "28 Students",
         "English Instructed"
-      ]
+      ],
+      "startDate": "2026-02",
+      "endDate": "2026-05",
+      "isCurrent": false
     },
     {
       "id": 2,
@@ -164,7 +117,58 @@
         ">50 Forensic Samples/Day",
         "Marquis-Simon & TruNarc",
         "GC-MS Confirmation"
-      ]
+      ],
+      "startDate": "2026-01",
+      "endDate": "2026-01",
+      "isCurrent": false
+    },
+    {
+      "id": 1792503287248,
+      "company": "Young On Top Malang",
+      "role": "Staff Energy & Green",
+      "period": "January 2025 - January 2026",
+      "bannerColor": "#55198b",
+      "summary": "Served dual roles as Staff of Energy and Green divisions at Young On Top Malang, organizing routine activities and supporting the execution of community driven volunteer projects focusing on public health and environmental sustainability.",
+      "metrics": [
+        "Energy & Green Divisions",
+        "Project Management",
+        "Community Volunteering"
+      ],
+      "startDate": "2025-01",
+      "endDate": "2026-01",
+      "isCurrent": false
+    },
+    {
+      "id": 1792506231049,
+      "company": "SD Muhammadiyah Malang",
+      "role": "Science Outreach Educator",
+      "period": "December 2025",
+      "bannerColor": "#55198b",
+      "summary": "Served as a Science Outreach Educator delivering interactive science sessions to a total of 104 4th-grade elementary students. Explained acid-base concepts, density, and simple science experiments through hands-on practice while simplifying complex scientific concepts for young learners.",
+      "metrics": [
+        "104 Elementary Students",
+        "Interactive Science Outreach",
+        "Acid-Base & Density Practice"
+      ],
+      "startDate": "2025-12",
+      "endDate": "2025-12",
+      "isCurrent": false
+    },
+    {
+      "id": 4,
+      "company": "Brawijaya University",
+      "role": "Laboratory Assistant (Organic Chemistry Lab)",
+      "period": "August 2025 - December 2025",
+      "bannerColor": "#3b1d6e",
+      "summary": "Guided 42 undergraduate students through Organic Chemistry laboratory sessions by supervising experimental procedures and explaining core chemical principles. Supervised 4 key experiments including caffeine isolation from tea leaves, curcuminoid extraction from turmeric, trimyristin hydrolysis from nutmeg, and compound identification in ginger essential oil while supporting FTIR and UV-Vis analysis and results interpretation.",
+      "metrics": [
+        "42 Practicum Students",
+        "4 Synthesis & Extraction Modules",
+        "FTIR & UV-Vis"
+      ],
+      "startDate": "2025-08",
+      "endDate": "2025-12",
+      "isCurrent": false
     },
     {
       "id": 3,
@@ -180,20 +184,26 @@
         "LC-HRMS Match: 98",
         "3%",
         "SINTA 2 Manuscript"
-      ]
+      ],
+      "startDate": "2025-08",
+      "endDate": "2025-12",
+      "isCurrent": false
     },
     {
-      "id": 4,
-      "company": "Brawijaya University",
-      "role": "Laboratory Assistant (Organic Chemistry Lab)",
-      "period": "August 2025 - December 2025",
-      "bannerColor": "#3b1d6e",
-      "summary": "Guided 42 undergraduate students through Organic Chemistry laboratory sessions by supervising experimental procedures and explaining core chemical principles. Supervised 4 key experiments including caffeine isolation from tea leaves, curcuminoid extraction from turmeric, trimyristin hydrolysis from nutmeg, and compound identification in ginger essential oil while supporting FTIR and UV-Vis analysis and results interpretation.",
+      "id": 1792503414155,
+      "company": "UKM Seni Religi - Brawijaya University",
+      "role": "Vice Head of Qur'anic Scientific Writing & App Design",
+      "period": "February - December 2025",
+      "bannerColor": "#55198b",
+      "summary": "Coordinated a 5 member team and managed weekly mentoring sessions, including preparing and delivering mentoring materials while closely monitoring members' project progress. Strengthened leadership, teamwork, communication, and scientific writing capabilities within the organization.",
       "metrics": [
-        "42 Practicum Students",
-        "4 Synthesis & Extraction Modules",
-        "FTIR & UV-Vis"
-      ]
+        "5 Member Team Coordination",
+        "Weekly Mentoring Sessions",
+        "Scientific Writing"
+      ],
+      "startDate": "2025-02",
+      "endDate": "2025-12",
+      "isCurrent": false
     },
     {
       "id": 5,
@@ -207,7 +217,10 @@
         "Optimum Dose : 90 ppm",
         "Turbidity: 2",
         "71 NTU"
-      ]
+      ],
+      "startDate": "2025-06",
+      "endDate": "2025-08",
+      "isCurrent": false
     },
     {
       "id": 6,
@@ -220,7 +233,26 @@
         "Depth: 0-20 Meters",
         "Winkler Titration",
         "Best Student Award"
-      ]
+      ],
+      "startDate": "2025-04",
+      "endDate": "2025-05",
+      "isCurrent": false
+    },
+    {
+      "id": 1792505766367,
+      "company": "Brawijaya University",
+      "role": "Staff for the Quranic Scholarly Writing Division (GBQN X 2024)",
+      "period": "October 2024",
+      "bannerColor": "#55198b",
+      "summary": "Targeted over 30 writing student organizations across various universities to expand the outreach and dissemination of MKTIA competition information. Compiled and managed a total of 62 Quranic Scientific Papers while coordinating with judges to support the participant presentation evaluation process.",
+      "metrics": [
+        "30+ University Orgs",
+        "62 Scientific Papers",
+        "Judge Coordination"
+      ],
+      "startDate": "2024-10",
+      "endDate": "2024-10",
+      "isCurrent": false
     }
   ],
   "certifications": [
@@ -231,52 +263,9 @@
       "issuedDate": "Mei 2026",
       "expiryDate": "",
       "detail": "Penyusunan dokumentasi HACCP meliputi analisis bahaya, penentuan CCP, sistem monitoring, tindakan koreksi, validasi, verifikasi, dan dokumentasi keamanan pangan berbasis Codex HACCP.",
-      "credentialUrl": "https://makinahli.com"
-    },
-    {
-      "id": 2,
-      "name": "Good Manufacturing Practice (GMP/CPOB) for Pharmaceutical Training (Batch 12)",
-      "issuer": "Makin Ahli",
-      "issuedDate": "Februari 2026",
-      "expiryDate": "",
-      "detail": "Prinsip dasar GMP/CPOB meliputi quality assurance, dokumentasi batch, higiene dan sanitasi, prosedur produksi, serta praktik quality control di industri farmasi.",
-      "credentialUrl": "https://makinahli.com"
-    },
-    {
-      "id": 3,
-      "name": "Research & Development Specialist (Flavour Industry)",
-      "issuer": "Latih",
-      "issuedDate": "Desember 2025",
-      "expiryDate": "",
-      "detail": "Kolaborasi lintas fungsi R&D dengan Quality Control, Regulatory & QA, Production, Purchasing, Marketing, serta Business Development/Sales.",
-      "credentialUrl": "https://latih.id"
-    },
-    {
-      "id": 4,
-      "name": "ISO/IEC 17025:2017 Sistem Manajemen Laboratorium",
-      "issuer": "Professional Training",
-      "issuedDate": "Januari 2026",
-      "expiryDate": "",
-      "detail": "Penerapan standar ISO/IEC 17025:2017 terkait kompetensi laboratorium pengujian dan kalibrasi, pengendalian dokumen, ketertelusuran pengukuran, serta validitas hasil.",
-      "credentialUrl": "https://iso.org"
-    },
-    {
-      "id": 5,
-      "name": "ISO 9001:2015 Sistem Manajemen Mutu",
-      "issuer": "Professional Training",
-      "issuedDate": "Januari 2026",
-      "expiryDate": "",
-      "detail": "Prinsip Sistem Manajemen Mutu ISO 9001:2015 meliputi pendekatan proses, pengendalian informasi terdokumentasi, manajemen risiko, evaluasi kinerja, dan perbaikan berkelanjutan.",
-      "credentialUrl": "https://iso.org"
-    },
-    {
-      "id": 6,
-      "name": "Healthcare Regulatory: Obat dan Kosmetik",
-      "issuer": "Regulatory Compliance Training",
-      "issuedDate": "Maret 2026",
-      "expiryDate": "",
-      "detail": "Dasar regulasi obat dan kosmetik, klasifikasi produk, kesiapan regulatori, jalur registrasi/notifikasi BPOM, serta pemenuhan dokumen keamanan dan mutu.",
-      "credentialUrl": "https://pom.go.id"
+      "credentialUrl": "https://makinahli.com",
+      "issuedYearMonth": "2026-05",
+      "expiryYearMonth": ""
     },
     {
       "id": 7,
@@ -285,7 +274,64 @@
       "issuedDate": "Maret 2026",
       "expiryDate": "",
       "detail": "Evaluasi penandaan dan klaim produk sesuai regulasi BPOM, identifikasi temuan kepatuhan, serta penyusunan tindak lanjut dan corrective action atas ketidaksesuaian.",
-      "credentialUrl": "https://pom.go.id"
+      "credentialUrl": "https://pom.go.id",
+      "issuedYearMonth": "2026-03",
+      "expiryYearMonth": ""
+    },
+    {
+      "id": 6,
+      "name": "Healthcare Regulatory: Obat dan Kosmetik",
+      "issuer": "Regulatory Compliance Training",
+      "issuedDate": "Maret 2026",
+      "expiryDate": "",
+      "detail": "Dasar regulasi obat dan kosmetik, klasifikasi produk, kesiapan regulatori, jalur registrasi/notifikasi BPOM, serta pemenuhan dokumen keamanan dan mutu.",
+      "credentialUrl": "https://pom.go.id",
+      "issuedYearMonth": "2026-03",
+      "expiryYearMonth": ""
+    },
+    {
+      "id": 2,
+      "name": "Good Manufacturing Practice (GMP/CPOB) for Pharmaceutical Training (Batch 12)",
+      "issuer": "Makin Ahli",
+      "issuedDate": "Februari 2026",
+      "expiryDate": "",
+      "detail": "Prinsip dasar GMP/CPOB meliputi quality assurance, dokumentasi batch, higiene dan sanitasi, prosedur produksi, serta praktik quality control di industri farmasi.",
+      "credentialUrl": "https://makinahli.com",
+      "issuedYearMonth": "2026-02",
+      "expiryYearMonth": ""
+    },
+    {
+      "id": 5,
+      "name": "ISO 9001:2015 Sistem Manajemen Mutu",
+      "issuer": "Professional Training",
+      "issuedDate": "Januari 2026",
+      "expiryDate": "",
+      "detail": "Prinsip Sistem Manajemen Mutu ISO 9001:2015 meliputi pendekatan proses, pengendalian informasi terdokumentasi, manajemen risiko, evaluasi kinerja, dan perbaikan berkelanjutan.",
+      "credentialUrl": "https://iso.org",
+      "issuedYearMonth": "2026-01",
+      "expiryYearMonth": ""
+    },
+    {
+      "id": 4,
+      "name": "ISO/IEC 17025:2017 Sistem Manajemen Laboratorium",
+      "issuer": "Professional Training",
+      "issuedDate": "Januari 2026",
+      "expiryDate": "",
+      "detail": "Penerapan standar ISO/IEC 17025:2017 terkait kompetensi laboratorium pengujian dan kalibrasi, pengendalian dokumen, ketertelusuran pengukuran, serta validitas hasil.",
+      "credentialUrl": "https://iso.org",
+      "issuedYearMonth": "2026-01",
+      "expiryYearMonth": ""
+    },
+    {
+      "id": 3,
+      "name": "Research & Development Specialist (Flavour Industry)",
+      "issuer": "Latih",
+      "issuedDate": "Desember 2025",
+      "expiryDate": "",
+      "detail": "Kolaborasi lintas fungsi R&D dengan Quality Control, Regulatory & QA, Production, Purchasing, Marketing, serta Business Development/Sales.",
+      "credentialUrl": "https://latih.id",
+      "issuedYearMonth": "2025-12",
+      "expiryYearMonth": ""
     }
   ],
   "publications": [
@@ -295,7 +341,9 @@
       "title": "Studi Potensi Antioksidan dan Laju Permeasi NLC-Cur-CTAB pada Membran Alami",
       "publisher": "Skripsi Sarjana Kimia UB & Manuskrip Jurnal SINTA 2 (2025-2026)",
       "summary": "Formulasi Nanostructured Lipid Carrier bermuatan kurkuminoid metode PIT (326 nm), ekstraksi Soxhlet, konfirmasi LC-HRMS (98,3%), dan evaluasi fotofisika pada empat polaritas pelarut.",
-      "url": "https://scholar.google.com"
+      "url": "https://scholar.google.com",
+      "publishedDate": "2026-02",
+      "year": "2026"
     },
     {
       "id": 2,
@@ -303,7 +351,9 @@
       "title": "SUPER-HUB: Alternative Action Pengemban Urea terhadap Tanaman dari Keratin Hasil Isolasi Limbah Bulu Ayam",
       "publisher": "Gold Medal Winner | National Level Scientific Writing Competition (NASPO 2024)",
       "summary": "Inovasi pemanfaatan keratin hasil isolasi limbah bulu ayam sebagai matriks lepas lambat pupuk urea untuk efisiensi serapan nutrisi tanaman.",
-      "url": "https://scholar.google.com"
+      "url": "https://scholar.google.com",
+      "publishedDate": "2024-11",
+      "year": "2024"
     },
     {
       "id": 3,
@@ -311,7 +361,9 @@
       "title": "Hydrogel-BAP: Alternative Functionalized Wound Covering Based on Biomass Waste Keratin Isolation",
       "publisher": "Silver Medal Winner | International Scientific Writing Competition (WYIIA 2024)",
       "summary": "Pengembangan penutup luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa.",
-      "url": "https://scholar.google.com"
+      "url": "https://scholar.google.com",
+      "publishedDate": "2024-10",
+      "year": "2024"
     },
     {
       "id": 4,
@@ -319,15 +371,9 @@
       "title": "SOK-ek: Sebagai Inhibitor Aksesibilitas Proliferasi Sel Kanker terhadap Breast Cancer melalui Oral Treatment Metode Ekstraksi Kunyit",
       "publisher": "Juara 2 | Futuristic Science Idea of The Quran Universitas Brawijaya (Juni 2024)",
       "summary": "Karya ilmiah eksplorasi potensi ekstrak kurkuminoid kunyit sebagai agen penghambat proliferasi sel kanker payudara.",
-      "url": "https://scholar.google.com"
-    },
-    {
-      "id": 5,
-      "type": "Publikasi Ilmiah",
-      "title": "Energi Terbarukan: Pembuatan Bensin dari Limbah Sampah Plastik Menggunakan Metode Destilasi",
-      "publisher": "Silver Medal Winner | National Applied Science Project Olympiad (NASPO 2021)",
-      "summary": "Riset konversi termal limbah plastik menjadi fraksi bahan bakar cair setara bensin melalui proses destilasi bertingkat.",
-      "url": "https://scholar.google.com"
+      "url": "https://scholar.google.com",
+      "publishedDate": "2024-06",
+      "year": "2024"
     },
     {
       "id": 6,
@@ -335,7 +381,19 @@
       "title": "Selected Author: Buku Antologi \"Antara Jarak dan Doa\" Jilid 2 & \"Merelakanmu dengan Caraku\"",
       "publisher": "National Writing Competition | Halo Penulis (2023 & 2024)",
       "summary": "Karya tulis terpilih dalam kompetisi penulisan tingkat nasional yang diterbitkan secara resmi dalam dua judul buku antologi.",
-      "url": "https://goodreads.com"
+      "url": "https://goodreads.com",
+      "publishedDate": "2024-01",
+      "year": "2024"
+    },
+    {
+      "id": 5,
+      "type": "Publikasi Ilmiah",
+      "title": "Energi Terbarukan: Pembuatan Bensin dari Limbah Sampah Plastik Menggunakan Metode Destilasi",
+      "publisher": "Silver Medal Winner | National Applied Science Project Olympiad (NASPO 2021)",
+      "summary": "Riset konversi termal limbah plastik menjadi fraksi bahan bakar cair setara bensin melalui proses destilasi bertingkat.",
+      "url": "https://scholar.google.com",
+      "publishedDate": "2021-12",
+      "year": "2021"
     }
   ],
   "leadership": [
@@ -395,25 +453,37 @@
       "id": 1,
       "title": "Formulasi & Karakterisasi NLC-Cur-CTAB",
       "description": "Pengembangan sistem penghantaran Nanostructured Lipid Carrier (NLC) bermuatan kurkuminoid dengan metode Phase Inversion Temperature (ukuran partikel 326 nm, konfirmasi LC-HRMS 98,3%).",
-      "accessUrl": "https://drive.google.com/"
+      "accessUrl": "https://drive.google.com/",
+      "projectDate": "2025-12",
+      "periodLabel": "Desember 2025",
+      "period": "Desember 2025"
     },
     {
       "id": 2,
       "title": "Optimasi Koagulasi PAC Air Bersih (PDAM Delta Tirta)",
       "description": "Riset independen dan evaluasi jar test koagulan PAC (rentang 50–140 ppm) dengan capaian dosis optimum 90 ppm dan penurunan kekeruhan hingga 2,71 ± 0,5 NTU.",
-      "accessUrl": "https://drive.google.com/"
+      "accessUrl": "https://drive.google.com/",
+      "projectDate": "2025-08",
+      "periodLabel": "Agustus 2025",
+      "period": "Agustus 2025"
     },
     {
       "id": 3,
       "title": "SUPER-HUB: Slow-Release Urea Berbasis Keratin",
       "description": "Inovasi matriks lepas lambat pupuk urea ramah lingkungan menggunakan biopolimer keratin hasil isolasi limbah bulu ayam (Peraih Gold Medal NASPO).",
-      "accessUrl": "https://drive.google.com/"
+      "accessUrl": "https://drive.google.com/",
+      "projectDate": "2024-11",
+      "periodLabel": "November 2024",
+      "period": "November 2024"
     },
     {
       "id": 4,
       "title": "Hydrogel-BAP: Functionalized Wound Covering",
       "description": "Pengembangan pembalut luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa untuk akselerasi regenerasi jaringan (Peraih Silver Medal WYIIA).",
-      "accessUrl": "https://drive.google.com/"
+      "accessUrl": "https://drive.google.com/",
+      "projectDate": "2024-10",
+      "periodLabel": "Oktober 2024",
+      "period": "Oktober 2024"
     }
   ]
 }
