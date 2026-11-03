@@ -12,7 +12,7 @@
   "education": {
     "institution": "Brawijaya University, Malang",
     "degree": "Bachelor's Degree in Chemistry",
-    "period": "August 2022 - July 2026",
+    "period": "September 2022 – Juli 2026",
     "gpa": "3,60 / 4,00",
     "thesis": "A Study of the Antioxidant Potential and Permeation Rate of NLC-Cur-CTAB in Natural Membranes",
     "highlights": [
@@ -21,7 +21,7 @@
       "Research Assistant Physical Chemistry Lab & Laboratory Assistant (Biochemistry & Organic Chemistry)",
       "Wakil Kepala Bidang Quranic Scientific Writing & App Design Universitas Brawijaya"
     ],
-    "startDate": "2022-08",
+    "startDate": "2022-09",
     "endDate": "2026-07"
   },
   "skillIcons": [
@@ -101,10 +101,7 @@
         "6 Practical Sessions",
         "28 Students",
         "English Instructed"
-      ],
-      "startDate": "2026-02",
-      "endDate": "2026-05",
-      "isCurrent": false
+      ]
     },
     {
       "id": 2,
@@ -117,10 +114,7 @@
         ">50 Forensic Samples/Day",
         "Marquis-Simon & TruNarc",
         "GC-MS Confirmation"
-      ],
-      "startDate": "2026-01",
-      "endDate": "2026-01",
-      "isCurrent": false
+      ]
     },
     {
       "id": 1792503287248,
@@ -133,10 +127,7 @@
         "Energy & Green Divisions",
         "Project Management",
         "Community Volunteering"
-      ],
-      "startDate": "2025-01",
-      "endDate": "2026-01",
-      "isCurrent": false
+      ]
     },
     {
       "id": 1792506231049,
@@ -149,10 +140,7 @@
         "104 Elementary Students",
         "Interactive Science Outreach",
         "Acid-Base & Density Practice"
-      ],
-      "startDate": "2025-12",
-      "endDate": "2025-12",
-      "isCurrent": false
+      ]
     },
     {
       "id": 4,
@@ -165,10 +153,7 @@
         "42 Practicum Students",
         "4 Synthesis & Extraction Modules",
         "FTIR & UV-Vis"
-      ],
-      "startDate": "2025-08",
-      "endDate": "2025-12",
-      "isCurrent": false
+      ]
     },
     {
       "id": 3,
@@ -184,10 +169,7 @@
         "LC-HRMS Match: 98",
         "3%",
         "SINTA 2 Manuscript"
-      ],
-      "startDate": "2025-08",
-      "endDate": "2025-12",
-      "isCurrent": false
+      ]
     },
     {
       "id": 1792503414155,
@@ -200,10 +182,7 @@
         "5 Member Team Coordination",
         "Weekly Mentoring Sessions",
         "Scientific Writing"
-      ],
-      "startDate": "2025-02",
-      "endDate": "2025-12",
-      "isCurrent": false
+      ]
     },
     {
       "id": 5,
@@ -217,10 +196,7 @@
         "Optimum Dose : 90 ppm",
         "Turbidity: 2",
         "71 NTU"
-      ],
-      "startDate": "2025-06",
-      "endDate": "2025-08",
-      "isCurrent": false
+      ]
     },
     {
       "id": 6,
@@ -233,10 +209,7 @@
         "Depth: 0-20 Meters",
         "Winkler Titration",
         "Best Student Award"
-      ],
-      "startDate": "2025-04",
-      "endDate": "2025-05",
-      "isCurrent": false
+      ]
     },
     {
       "id": 1792505766367,
@@ -249,111 +222,106 @@
         "30+ University Orgs",
         "62 Scientific Papers",
         "Judge Coordination"
-      ],
-      "startDate": "2024-10",
-      "endDate": "2024-10",
-      "isCurrent": false
+      ]
     }
   ],
   "certifications": [
     {
+      "id": 6,
+      "name": "Healthcare Regulatory - Drugs & Cosmetics",
+      "issuer": "Ioda Academy",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "September 2026",
+      "expiryDate": "",
+      "detail": "Assessed regulatory readiness for 2 product categories (drugs and cosmetics) and completed 3 applied projects to identify documentation gaps, evaluate labeling and claims compliance, and determine appropriate regulatory follow-up under BPOM requirements.",
+      "credentialUrl": "https://drive.google.com/file/d/1BbHfvIpPAhEbcEabgRSymugSesWX_ha5/view?usp=sharing"
+    },
+    {
+      "id": 5,
+      "name": "ISO 9001:2015 in Food Industry",
+      "issuer": "Makin Ahli",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "September 2026",
+      "expiryDate": "",
+      "detail": "Training on the implementation of ISO 9001:2015 in quality management systems, covering the process approach, control of documented information, risk and opportunity management, performance evaluation, and continuous improvement.",
+      "credentialUrl": "https://drive.google.com/file/d/1mbG2WOudjKC7ONn6tJBzQZqXWgyDQomv/view?usp=sharing"
+    },
+    {
+      "id": 4,
+      "name": "ISO/IEC 17025:2017 Laboratory Management System",
+      "issuer": "Professional Training",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "September 2026",
+      "expiryDate": "",
+      "detail": "Training on the implementation of ISO/IEC 17025:2017 in testing and calibration laboratories, covering laboratory competence, document control, measurement traceability, validity of results, and the implementation of a laboratory management system.",
+      "credentialUrl": "https://drive.google.com/file/d/1uoUPvqXB2Rfdwd-qyCmKgbpQsyDwL6-p/view?usp=sharing"
+    },
+    {
       "id": 1,
       "name": "HACCP Documentation Development Training (Batch 32)",
       "issuer": "Makin Ahli",
-      "issuedDate": "Mei 2026",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "May 2026",
       "expiryDate": "",
-      "detail": "Penyusunan dokumentasi HACCP meliputi analisis bahaya, penentuan CCP, sistem monitoring, tindakan koreksi, validasi, verifikasi, dan dokumentasi keamanan pangan berbasis Codex HACCP.",
-      "credentialUrl": "https://makinahli.com",
-      "issuedYearMonth": "2026-05",
-      "expiryYearMonth": ""
-    },
-    {
-      "id": 7,
-      "name": "Healthcare Regulatory: Penandaan, Klaim & Tindak Lanjut Kepatuhan",
-      "issuer": "Regulatory Compliance Training",
-      "issuedDate": "Maret 2026",
-      "expiryDate": "",
-      "detail": "Evaluasi penandaan dan klaim produk sesuai regulasi BPOM, identifikasi temuan kepatuhan, serta penyusunan tindak lanjut dan corrective action atas ketidaksesuaian.",
-      "credentialUrl": "https://pom.go.id",
-      "issuedYearMonth": "2026-03",
-      "expiryYearMonth": ""
-    },
-    {
-      "id": 6,
-      "name": "Healthcare Regulatory: Obat dan Kosmetik",
-      "issuer": "Regulatory Compliance Training",
-      "issuedDate": "Maret 2026",
-      "expiryDate": "",
-      "detail": "Dasar regulasi obat dan kosmetik, klasifikasi produk, kesiapan regulatori, jalur registrasi/notifikasi BPOM, serta pemenuhan dokumen keamanan dan mutu.",
-      "credentialUrl": "https://pom.go.id",
-      "issuedYearMonth": "2026-03",
-      "expiryYearMonth": ""
+      "detail": "Completed training on HACCP documentation preparation, including hazard analysis, CCP determination, monitoring systems, corrective actions, validation, verification, and food safety documentation based on Codex HACCP principles.",
+      "credentialUrl": "https://drive.google.com/file/d/1oTJMEETlX5FjS30ri1DOGMCEKmlF8drw/view?usp=sharing"
     },
     {
       "id": 2,
       "name": "Good Manufacturing Practice (GMP/CPOB) for Pharmaceutical Training (Batch 12)",
       "issuer": "Makin Ahli",
-      "issuedDate": "Februari 2026",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "February 2026",
       "expiryDate": "",
-      "detail": "Prinsip dasar GMP/CPOB meliputi quality assurance, dokumentasi batch, higiene dan sanitasi, prosedur produksi, serta praktik quality control di industri farmasi.",
-      "credentialUrl": "https://makinahli.com",
-      "issuedYearMonth": "2026-02",
-      "expiryYearMonth": ""
-    },
-    {
-      "id": 5,
-      "name": "ISO 9001:2015 Sistem Manajemen Mutu",
-      "issuer": "Professional Training",
-      "issuedDate": "Januari 2026",
-      "expiryDate": "",
-      "detail": "Prinsip Sistem Manajemen Mutu ISO 9001:2015 meliputi pendekatan proses, pengendalian informasi terdokumentasi, manajemen risiko, evaluasi kinerja, dan perbaikan berkelanjutan.",
-      "credentialUrl": "https://iso.org",
-      "issuedYearMonth": "2026-01",
-      "expiryYearMonth": ""
-    },
-    {
-      "id": 4,
-      "name": "ISO/IEC 17025:2017 Sistem Manajemen Laboratorium",
-      "issuer": "Professional Training",
-      "issuedDate": "Januari 2026",
-      "expiryDate": "",
-      "detail": "Penerapan standar ISO/IEC 17025:2017 terkait kompetensi laboratorium pengujian dan kalibrasi, pengendalian dokumen, ketertelusuran pengukuran, serta validitas hasil.",
-      "credentialUrl": "https://iso.org",
-      "issuedYearMonth": "2026-01",
-      "expiryYearMonth": ""
+      "detail": "Completed training on the basic principles of Good Manufacturing Practice, including quality assurance, documentation, hygiene, sanitation, production procedures, and quality control practices in pharmaceutical manufacturing",
+      "credentialUrl": "https://drive.google.com/file/d/1Bo4OK-IPPz7TUqTCyX5IRGMrOE9oswb6/view?usp=sharing"
     },
     {
       "id": 3,
       "name": "Research & Development Specialist (Flavour Industry)",
       "issuer": "Latih",
-      "issuedDate": "Desember 2025",
+      "issuedYearMonth": "",
+      "expiryYearMonth": "",
+      "issuedDate": "December 2025",
       "expiryDate": "",
-      "detail": "Kolaborasi lintas fungsi R&D dengan Quality Control, Regulatory & QA, Production, Purchasing, Marketing, serta Business Development/Sales.",
-      "credentialUrl": "https://latih.id",
-      "issuedYearMonth": "2025-12",
-      "expiryYearMonth": ""
+      "detail": "Studied end-to-end R&D workflow and cross-functional collaboration with QC, QA, Regulatory, Production, Purchasing, Marketing, and Business Development, strengthening understanding of product development and research coordination .",
+      "credentialUrl": "https://drive.google.com/file/d/1EOWT68q0V-6Qzr_ccuvzPyCZc1hkht5x/view?usp=sharing"
+    },
+    {
+      "id": 1793454639871,
+      "name": "Online Mini Bootcamp : Food Laboratory",
+      "issuer": "Mindo Education",
+      "issuedYearMonth": "2025-09",
+      "expiryYearMonth": "",
+      "issuedDate": "Sep 2025",
+      "expiryDate": "",
+      "detail": "Completed a one-week intensive bootcamp covering Food Analysis for Food Safety and Quality, Good Laboratory Practice (GLP), Occupational Health and Safety Management in Laboratory, Quality Analysis in Food Microbiology, and Introduction to HPLC for Food Analysis.",
+      "credentialUrl": "https://drive.google.com/file/d/1aDkl1Oxd4xIG6vXhijuKlMf2VwAdGPkJ/view?usp=sharing"
     }
   ],
   "publications": [
     {
-      "id": 1,
+      "id": 4,
       "type": "Publikasi Ilmiah",
-      "title": "Studi Potensi Antioksidan dan Laju Permeasi NLC-Cur-CTAB pada Membran Alami",
-      "publisher": "Skripsi Sarjana Kimia UB & Manuskrip Jurnal SINTA 2 (2025-2026)",
-      "summary": "Formulasi Nanostructured Lipid Carrier bermuatan kurkuminoid metode PIT (326 nm), ekstraksi Soxhlet, konfirmasi LC-HRMS (98,3%), dan evaluasi fotofisika pada empat polaritas pelarut.",
-      "url": "https://scholar.google.com",
-      "publishedDate": "2026-02",
-      "year": "2026"
+      "title": "SOK-ek: Sebagai Inhibitor Aksesibilitas Proliferasi Sel Kanker terhadap Breast Cancer melalui Oral Treatment Metode Ekstraksi Kunyit",
+      "publisher": "2nd Place | Futuristic Science Idea of The Quran Universitas Brawijaya (Juni 2024)",
+      "publishedDate": "2024-06",
+      "summary": "Research Overview:\nDeveloped a curcumin-based oral supplement concept using turmeric (Curcuma longa) extract as a potential inhibitor of breast cancer cell proliferation. This literature-based research examined NF-κB signaling inhibition and proposed a non-thermal extraction method to preserve the stability of bioactive compounds.\n\nKey Results & Achievements:\nDesigned the SOK-ek capsule formulation concept, outlined curcumin's proposed inhibitory mechanism, and developed a 17-month product development roadmap, covering preclinical research (3 months), three clinical trial phases (3, 4, and 3 months), and postclinical evaluation (4 months). The innovation earned 2nd Place at the Universitas Brawijaya level, demonstrating multidisciplinary collaboration across Chemistry, Medicine, and Physics.",
+      "url": "-"
     },
     {
-      "id": 2,
-      "type": "Publikasi Ilmiah",
-      "title": "SUPER-HUB: Alternative Action Pengemban Urea terhadap Tanaman dari Keratin Hasil Isolasi Limbah Bulu Ayam",
-      "publisher": "Gold Medal Winner | National Level Scientific Writing Competition (NASPO 2024)",
-      "summary": "Inovasi pemanfaatan keratin hasil isolasi limbah bulu ayam sebagai matriks lepas lambat pupuk urea untuk efisiensi serapan nutrisi tanaman.",
-      "url": "https://scholar.google.com",
-      "publishedDate": "2024-11",
-      "year": "2024"
+      "id": 6,
+      "type": "Artikel Eksternal",
+      "title": "Selected Author: Buku Antologi",
+      "publisher": "National Writing Competition | Halo Penulis (2023 & 2024)",
+      "publishedDate": "",
+      "summary": "Selected works from a national writing competition that were officially published in two anthology books.",
+      "url": "-"
     },
     {
       "id": 3,
@@ -361,29 +329,15 @@
       "title": "Hydrogel-BAP: Alternative Functionalized Wound Covering Based on Biomass Waste Keratin Isolation",
       "publisher": "Silver Medal Winner | International Scientific Writing Competition (WYIIA 2024)",
       "summary": "Pengembangan penutup luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa.",
-      "url": "https://scholar.google.com",
-      "publishedDate": "2024-10",
-      "year": "2024"
+      "url": "https://scholar.google.com"
     },
     {
-      "id": 4,
+      "id": 2,
       "type": "Publikasi Ilmiah",
-      "title": "SOK-ek: Sebagai Inhibitor Aksesibilitas Proliferasi Sel Kanker terhadap Breast Cancer melalui Oral Treatment Metode Ekstraksi Kunyit",
-      "publisher": "Juara 2 | Futuristic Science Idea of The Quran Universitas Brawijaya (Juni 2024)",
-      "summary": "Karya ilmiah eksplorasi potensi ekstrak kurkuminoid kunyit sebagai agen penghambat proliferasi sel kanker payudara.",
-      "url": "https://scholar.google.com",
-      "publishedDate": "2024-06",
-      "year": "2024"
-    },
-    {
-      "id": 6,
-      "type": "Artikel Eksternal",
-      "title": "Selected Author: Buku Antologi \"Antara Jarak dan Doa\" Jilid 2 & \"Merelakanmu dengan Caraku\"",
-      "publisher": "National Writing Competition | Halo Penulis (2023 & 2024)",
-      "summary": "Karya tulis terpilih dalam kompetisi penulisan tingkat nasional yang diterbitkan secara resmi dalam dua judul buku antologi.",
-      "url": "https://goodreads.com",
-      "publishedDate": "2024-01",
-      "year": "2024"
+      "title": "SUPER-HUB: Alternative Action Pengemban Urea terhadap Tanaman dari Keratin Hasil Isolasi Limbah Bulu Ayam",
+      "publisher": "Gold Medal Winner | National Level Scientific Writing Competition (NASPO 2024)",
+      "summary": "Inovasi pemanfaatan keratin hasil isolasi limbah bulu ayam sebagai matriks lepas lambat pupuk urea untuk efisiensi serapan nutrisi tanaman.",
+      "url": "https://scholar.google.com"
     },
     {
       "id": 5,
@@ -391,9 +345,16 @@
       "title": "Energi Terbarukan: Pembuatan Bensin dari Limbah Sampah Plastik Menggunakan Metode Destilasi",
       "publisher": "Silver Medal Winner | National Applied Science Project Olympiad (NASPO 2021)",
       "summary": "Riset konversi termal limbah plastik menjadi fraksi bahan bakar cair setara bensin melalui proses destilasi bertingkat.",
-      "url": "https://scholar.google.com",
-      "publishedDate": "2021-12",
-      "year": "2021"
+      "url": "https://scholar.google.com"
+    },
+    {
+      "id": 1,
+      "type": "Publikasi Ilmiah",
+      "title": "Photophysical Study on the Characteristics of Curcumin and Curcumin-Loaded Nanostructured Lipid Carrier (NLC) in Solvents of Varying Polarity and Alkaline pH Environments",
+      "publisher": "JKSA SINTA 2 (On Process)",
+      "publishedDate": "",
+      "summary": "• Formulated curcumin loaded NLC using the PIT method, achieving homogeneous particles with an average size of 326 nm.\n• Isolated and identified curcuminoids via Soxhlet extraction (9.44% - 18% yield) and LC-HRMS analysis with 98.3% compound matching.\n• Evaluated photophysical stability across four solvent polarities and basic pH using UV-Vis, Spectrofluorometer, and CLSM.",
+      "url": "-"
     }
   ],
   "leadership": [
@@ -450,40 +411,28 @@
   ],
   "projects": [
     {
-      "id": 1,
-      "title": "Formulasi & Karakterisasi NLC-Cur-CTAB",
-      "description": "Pengembangan sistem penghantaran Nanostructured Lipid Carrier (NLC) bermuatan kurkuminoid dengan metode Phase Inversion Temperature (ukuran partikel 326 nm, konfirmasi LC-HRMS 98,3%).",
-      "accessUrl": "https://drive.google.com/",
-      "projectDate": "2025-12",
-      "periodLabel": "Desember 2025",
-      "period": "Desember 2025"
-    },
-    {
-      "id": 2,
-      "title": "Optimasi Koagulasi PAC Air Bersih (PDAM Delta Tirta)",
-      "description": "Riset independen dan evaluasi jar test koagulan PAC (rentang 50–140 ppm) dengan capaian dosis optimum 90 ppm dan penurunan kekeruhan hingga 2,71 ± 0,5 NTU.",
-      "accessUrl": "https://drive.google.com/",
-      "projectDate": "2025-08",
-      "periodLabel": "Agustus 2025",
-      "period": "Agustus 2025"
+      "id": 4,
+      "title": "Hydrogel-BAP: Functionalized Wound Covering",
+      "description": "Pengembangan pembalut luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa untuk akselerasi regenerasi jaringan (Peraih Silver Medal WYIIA).",
+      "accessUrl": "https://drive.google.com/"
     },
     {
       "id": 3,
       "title": "SUPER-HUB: Slow-Release Urea Berbasis Keratin",
       "description": "Inovasi matriks lepas lambat pupuk urea ramah lingkungan menggunakan biopolimer keratin hasil isolasi limbah bulu ayam (Peraih Gold Medal NASPO).",
-      "accessUrl": "https://drive.google.com/",
-      "projectDate": "2024-11",
-      "periodLabel": "November 2024",
-      "period": "November 2024"
+      "accessUrl": "https://drive.google.com/"
     },
     {
-      "id": 4,
-      "title": "Hydrogel-BAP: Functionalized Wound Covering",
-      "description": "Pengembangan pembalut luka fungsional berbasis hidrogel dari isolasi keratin limbah biomassa untuk akselerasi regenerasi jaringan (Peraih Silver Medal WYIIA).",
-      "accessUrl": "https://drive.google.com/",
-      "projectDate": "2024-10",
-      "periodLabel": "Oktober 2024",
-      "period": "Oktober 2024"
+      "id": 2,
+      "title": "Optimasi Koagulasi PAC Air Bersih (PDAM Delta Tirta)",
+      "description": "Riset independen dan evaluasi jar test koagulan PAC (rentang 50–140 ppm) dengan capaian dosis optimum 90 ppm dan penurunan kekeruhan hingga 2,71 ± 0,5 NTU.",
+      "accessUrl": "https://drive.google.com/"
+    },
+    {
+      "id": 1,
+      "title": "Formulasi & Karakterisasi NLC-Cur-CTAB",
+      "description": "Pengembangan sistem penghantaran Nanostructured Lipid Carrier (NLC) bermuatan kurkuminoid dengan metode Phase Inversion Temperature (ukuran partikel 326 nm, konfirmasi LC-HRMS 98,3%).",
+      "accessUrl": "https://drive.google.com/"
     }
   ]
 }
