@@ -742,6 +742,10 @@ const baseUrl = (import.meta.env.BASE_URL || '').replace(/\/$/, '') || '/';
         if (!parsed.projects || !Array.isArray(parsed.projects)) {
           parsed.projects = fallback.projects || [];
         }
+        if (parsed.hero && parsed.hero.resumeUrl === '/assets/CV-Anisah-Rihadatul-Aisy.pdf') {
+          parsed.hero.resumeUrl = '/assets/CV_Anisah_Rihadatul_Aisy.pdf';
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
         sortAllCollections(parsed);
         return parsed;
       } catch {
